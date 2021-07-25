@@ -7,6 +7,8 @@ void
 	const unsigned char	*u_src = (unsigned char *)src;
 	size_t				i;
 
+	if (!dst || !src)
+		return (NULL);
 	u_dst = (unsigned char *)dst;
 	i = 0;
 	if (u_dst < u_src)

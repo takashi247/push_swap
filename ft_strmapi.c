@@ -17,5 +17,6 @@ char
 		new_s[i] = (*f)(i, s[i]);
 		i++;
 	}
+	new_s[i] = '\0';
 	return (new_s);
 }

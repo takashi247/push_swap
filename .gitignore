@@ -5,7 +5,7 @@ libft.a
 .DS_Store
 
 # Object files
-*.DS_Store
+*.o
 
 # Executables
 *.exe

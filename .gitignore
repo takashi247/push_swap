@@ -1,0 +1,15 @@
+# Project file
+libft.a
+
+# General
+.DS_Store
+
+# Object files
+*.DS_Store
+
+# Executables
+*.exe
+*.out
+
+# Debug files
+*.dSYM/

@@ -82,5 +82,6 @@ unsigned char	*ft_strjoin_u(unsigned char const *us1,
 void			ft_putstr_fd_u(unsigned char *us, int fd);
 void			ft_putendl_fd_u(unsigned char *us, int fd);
 int				ft_atoi_s(const char *str);
+int				ft_isspace(int c);
 
 #endif

@@ -37,5 +37,5 @@ double
 	i = 1;
 	while (ft_isdigit(*str))
 		ld_num += (*str++ - '0') * get_denominator(i++);
-	return ((double)ld_num);
+	return ((double)(sign * ld_num));
 }

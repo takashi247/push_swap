@@ -60,7 +60,9 @@ SRCS_PLUS	:= ft_strlen_u.c \
 				ft_strjoin_u.c \
 				ft_putstr_fd_u.c \
 				ft_putendl_fd_u.c \
-				ft_atoi_s.c
+				ft_atoi_s.c \
+				ft_isspace.c \
+				ft_atof.c
 
 OBJS		:= $(SRCS:.c=.o)
 
@@ -70,15 +72,15 @@ OBJS_PLUS	:= $(SRCS_PLUS:.c=.o)
 
 # DEBUG := -g -fsanitize=address
 
-all: $(NAME)
+all: 		$(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): 	$(OBJS)
 	$(AR) $(ARFLAGS) $@ $^
 
-bonus: $(OBJS) $(OBJS_BONUS)
+bonus: 		$(OBJS) $(OBJS_BONUS)
 	$(AR) $(ARFLAGS) $(NAME) $(OBJS) $(OBJS_BONUS)
 
-plus: $(OBJS) $(OBJS_BONUS) $(OBJS_PLUS)
+plus: 		$(OBJS) $(OBJS_BONUS) $(OBJS_PLUS)
 	$(AR) $(ARFLAGS) $(NAME) $(OBJS) $(OBJS_BONUS) $(OBJS_PLUS)
 
 .c.o:
@@ -87,9 +89,9 @@ plus: $(OBJS) $(OBJS_BONUS) $(OBJS_PLUS)
 clean:
 	rm -f $(OBJS) $(OBJS_BONUS) $(OBJS_PLUS)
 
-fclean: clean
+fclean: 	clean
 	rm -f $(NAME)
 
-re: fclean all
+re: 		fclean all
 
-.PHONY: all clean fclean re bonus plus
+.PHONY: 	all clean fclean re bonus plus

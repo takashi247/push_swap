@@ -5,7 +5,12 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+
+/* for INT_MAX, INT_MIN */
 # include <limits.h>
+
+/* for DBL_MAX, DBL_MIN */
+# include <float.h>
 
 /* list structure */
 
@@ -83,5 +88,6 @@ void			ft_putstr_fd_u(unsigned char *us, int fd);
 void			ft_putendl_fd_u(unsigned char *us, int fd);
 int				ft_atoi_s(const char *str);
 int				ft_isspace(int c);
+double			ft_atof(const char *str);
 
 #endif

@@ -96,5 +96,7 @@ int				ft_atoi_s(const char *str);
 int				ft_isspace(int c);
 double			ft_atof(const char *str);
 int				ft_isnumeric(char *str);
+void			ft_free_str(char **s);
+void			ft_free_str_u(unsigned char **us);
 
 #endif

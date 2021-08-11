@@ -63,7 +63,9 @@ SRCS_PLUS	:= ft_strlen_u.c \
 				ft_atoi_s.c \
 				ft_isspace.c \
 				ft_atof.c \
-				ft_isnumeric.c
+				ft_isnumeric.c \
+				ft_free_str.c \
+				ft_free_str_u.c
 
 OBJS		:= $(SRCS:.c=.o)
 

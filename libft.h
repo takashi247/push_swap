@@ -12,6 +12,12 @@
 /* for DBL_MAX, DBL_MIN */
 # include <float.h>
 
+/* for INFINITY and NAN */
+# include <math.h>
+
+/* for ft_atof */
+# define MAX_NEGATIVE_INDEX 324
+
 /* list structure */
 
 typedef struct s_list
@@ -89,5 +95,6 @@ void			ft_putendl_fd_u(unsigned char *us, int fd);
 int				ft_atoi_s(const char *str);
 int				ft_isspace(int c);
 double			ft_atof(const char *str);
+int				ft_isnumeric(char *str);
 
 #endif

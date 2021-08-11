@@ -13,6 +13,35 @@ static long double
 	return (denominator);
 }
 
+static long double
+	get_index(const char *str)
+{
+	long double	index;
+	double		multiplier;
+	int			count;
+
+	index = 1.0;
+	str++;
+	multiplier = 10.0;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			multiplier = 0.1;
+		str++;
+	}
+	count = ft_atoi_s(str);
+	if (!count && ft_isdigit(*str) && *str != '0')
+	{
+		if (multiplier == 10.0)
+			return (INFINITY);
+		else
+			count = MAX_NEGATIVE_INDEX;
+	}
+	while (count--)
+		index *= multiplier;
+	return ((double)index);
+}
+
 double
 	ft_atof(const char *str)
 {
@@ -37,5 +66,8 @@ double
 	i = 1;
 	while (ft_isdigit(*str))
 		ld_num += (*str++ - '0') * get_denominator(i++);
-	return ((double)(sign * ld_num));
+	if (*str == 'e')
+		return ((double)(sign * ld_num * get_index(str)));
+	else
+		return ((double)(sign * ld_num));
 }

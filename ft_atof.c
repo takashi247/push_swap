@@ -67,7 +67,7 @@ double
 	i = 1;
 	while (ft_isdigit(*str))
 		ld_num += (*str++ - '0') * get_denominator(i++);
-	if (*str == 'e')
+	if (*str == 'e' || *str == 'E')
 		return ((double)(sign * ld_num * get_index(++str)));
 	else
 		return ((double)(sign * ld_num));

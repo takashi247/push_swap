@@ -4,7 +4,7 @@ static int
 	check_condition(char c, int has_period, int has_e)
 {
 	return (c && (ft_isdigit(c) || (c == '.' && !has_period)
-			|| (c == 'e' && !has_e)));
+			|| ((c == 'e' || c == 'E') && !has_e)));
 }
 
 static void
@@ -44,7 +44,7 @@ int
 				return (0);
 			has_period = 1;
 		}
-		else if (*str == 'e')
+		else if (*str == 'e' || *str == 'E')
 		{
 			if (!validate_index(&str))
 				return (0);

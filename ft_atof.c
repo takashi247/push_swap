@@ -21,7 +21,6 @@ static long double
 	int			count;
 
 	index = 1.0;
-	str++;
 	multiplier = 10.0;
 	if (*str == '+' || *str == '-')
 	{
@@ -29,6 +28,8 @@ static long double
 			multiplier = 0.1;
 		str++;
 	}
+	if (*str == '+' || *str == '-')
+		return (index);
 	count = ft_atoi_s(str);
 	if (!count && ft_isdigit(*str) && *str != '0')
 	{
@@ -67,7 +68,7 @@ double
 	while (ft_isdigit(*str))
 		ld_num += (*str++ - '0') * get_denominator(i++);
 	if (*str == 'e')
-		return ((double)(sign * ld_num * get_index(str)));
+		return ((double)(sign * ld_num * get_index(++str)));
 	else
 		return ((double)(sign * ld_num));
 }

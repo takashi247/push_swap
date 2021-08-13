@@ -14,6 +14,17 @@ static void
 	*has_e = 0;
 }
 
+static int
+	validate_index(char **str)
+{
+	if (*(*str + 1) == '+' || *(*str + 1) == '-')
+		(*str)++;
+	if (!ft_isdigit(*(*str + 1)))
+		return (0);
+	else
+		return (1);
+}
+
 int
 	ft_isnumeric(char *str)
 {
@@ -35,7 +46,7 @@ int
 		}
 		else if (*str == 'e')
 		{
-			if (!ft_isdigit(*(str + 1)))
+			if (!validate_index(&str))
 				return (0);
 			has_e = 1;
 		}

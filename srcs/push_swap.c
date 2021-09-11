@@ -1,4 +1,4 @@
-#include "../include/push_swap.h"
+#include "push_swap.h"
 
 static void
 	exit_with_error(void)

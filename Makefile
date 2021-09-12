@@ -71,7 +71,8 @@ SRCS_PLUS	:= ft_strlen_u.c \
 				ft_blstsize.c \
 				ft_blstadd_back.c \
 				ft_blstdelone.c \
-				ft_blstclear.c
+				ft_blstclear.c \
+				ft_isint.c
 
 OBJS		:= $(SRCS:.c=.o)
 

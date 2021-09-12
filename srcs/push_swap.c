@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:28:12 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/11 16:28:58 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/12 08:57:52 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int
 	i = 0;
 	while (i < size_of_stack)
 	{
-		nums[i] = atoi(av[i]);
+		nums[i] = ft_atoi_s(av[i]);
 		i++;
 	}
 	return (nums);
@@ -50,6 +50,8 @@ static t_bool
 	while (i < size_of_stack)
 	{
 		s = av[i];
+		if (!ft_is_int_range(s))
+			return (FALSE);
 		zero_flag = 0;
 		if (*s == '+' || *s == '-' || *s == '0')
 		{

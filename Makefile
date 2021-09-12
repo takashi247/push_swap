@@ -4,7 +4,8 @@ CC			:= gcc
 
 CFLAGS		:= -Wall -Wextra -Werror
 
-SRCS		:= push_swap.c
+SRCS		:= push_swap.c \
+				is_int_range.c
 
 SRCSDIR		:= ./srcs/
 

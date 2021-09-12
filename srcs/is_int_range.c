@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 09:51:24 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/12 09:51:26 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/12 11:32:36 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_bool
 }
 
 /*
-** return true if number is within int range
+** return true if a number given as string is within int range
 */
 
 t_bool

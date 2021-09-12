@@ -4,8 +4,7 @@ CC			:= gcc
 
 CFLAGS		:= -Wall -Wextra -Werror
 
-SRCS		:= push_swap.c \
-				is_int_range.c
+SRCS		:= push_swap.c
 
 SRCSDIR		:= ./srcs/
 
@@ -22,8 +21,8 @@ LIBRARY		:= -L$(LIBDIR) -lft
 
 RM			:= rm -f
 
-DEBUG 		:=
-# DEBUG		:= -g
+# DEBUG 		:=
+DEBUG		:= -g
 
 all:		$(NAME)
 
@@ -42,6 +41,7 @@ clean:
 
 fclean:		clean
 	$(RM) $(NAME)
+	$(MAKE) fclean -C $(LIBDIR)
 
 re:			fclean all
 

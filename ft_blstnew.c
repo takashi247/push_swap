@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 14:24:00 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/12 14:50:23 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/12 16:30:13 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_blist
 {
 	t_blist	*new;
 
+	if (!content)
+		return (NULL);
 	new = (t_blist *)malloc(sizeof(t_blist));
 	if (!new)
 		return (NULL);

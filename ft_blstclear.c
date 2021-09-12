@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 15:10:14 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/12 15:47:09 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/12 17:06:12 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void
 
 	if (blst)
 	{
+		(*blst)->prev->next = NULL;
 		current = *blst;
 		while (current)
 		{

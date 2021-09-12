@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnishina <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:43:30 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/11 16:43:30 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/12 14:23:31 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 /* for INFINITY and NAN */
 # include <math.h>
 
+/* for boolean type */
+# include "bool.h"
+
 /* for ft_atof */
 # define MAX_NEGATIVE_INDEX 324
 
@@ -37,6 +40,15 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
+/* bidirectional list */
+
+typedef struct s_blist
+{
+	void			*content;
+	struct s_blist	*prev;
+	struct s_blist	*next;
+}	t_blist;
 
 /* Part 1 functions */
 

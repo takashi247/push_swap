@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:43:30 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/12 14:23:31 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/12 15:13:32 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,11 @@ double			ft_atof(const char *str);
 int				ft_isnumeric(char *str);
 void			ft_free_str(char **s);
 void			ft_free_str_u(unsigned char **us);
+t_blist			*ft_blstnew(void *content);
+void			ft_blstadd_front(t_blist **blst, t_blist *new);
+int				ft_blstsize(t_blist *blst);
+void			ft_blstadd_back(t_blist **blst, t_blist *new);
+void			ft_blstdelone(t_blist *blst, void (*del)(void *));
+void			ft_blstclear(t_blist **blst, void (*del)(void *));
 
 #endif

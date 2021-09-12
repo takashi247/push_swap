@@ -65,7 +65,13 @@ SRCS_PLUS	:= ft_strlen_u.c \
 				ft_atof.c \
 				ft_isnumeric.c \
 				ft_free_str.c \
-				ft_free_str_u.c
+				ft_free_str_u.c \
+				ft_blstnew.c \
+				ft_blstadd_front.c \
+				ft_blstsize.c \
+				ft_blstadd_back.c \
+				ft_blstdelone.c \
+				ft_blstclear.c
 
 OBJS		:= $(SRCS:.c=.o)
 

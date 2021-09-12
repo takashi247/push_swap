@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:28:12 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/12 08:57:52 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/12 17:02:46 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,49 +19,46 @@ static void
 	exit(EXIT_FAILURE);
 }
 
-static int
-	*convert_to_nums(char **av, const int size_of_stack)
+static t_blist
+	*convert_to_blists(char **av, const int size_of_stack)
 {
-	int	i;
-	int	*nums;
+	int		i;
+	t_blist	*head;
+	t_blist	*new;
+	int		*num;
 
 	if (!av || !size_of_stack)
 		return (NULL);
-	nums = (int *)malloc(sizeof(int) * size_of_stack);
-	if (!nums)
-		return (NULL);
 	i = 0;
+	head = NULL;
 	while (i < size_of_stack)
 	{
-		nums[i] = ft_atoi_s(av[i]);
+		num = (int *)malloc(sizeof(int));
+		if (num)
+			*num = ft_atoi_s(av[i]);
+		new = ft_blstnew(num);
+		if (!new)
+		{
+			ft_blstclear(&head, free);
+			return (NULL);
+		}
+		ft_blstadd_back(&head, new);
 		i++;
 	}
-	return (nums);
+	return (head);
 }
 
 static t_bool
 	is_valid_input(char **av, const int size_of_stack)
 {
 	int		i;
-	int		zero_flag;
 	char	*s;
 
 	i = 0;
 	while (i < size_of_stack)
 	{
 		s = av[i];
-		if (!ft_is_int_range(s))
-			return (FALSE);
-		zero_flag = 0;
-		if (*s == '+' || *s == '-' || *s == '0')
-		{
-			if (*s == '0')
-				zero_flag = 1;
-			s++;
-		}
-		while (*s && ft_isdigit(*s) && !(zero_flag && *s == '0'))
-			s++;
-		if (*s)
+		if (!ft_isint(s))
 			return (FALSE);
 		i++;
 	}
@@ -71,7 +68,8 @@ static t_bool
 int
 	main(int ac, char **av)
 {
-	int			*nums;
+	t_blist		*head;
+	t_blist		*current;
 	int			i;
 	const int	size_of_stack = ac - 1;
 
@@ -79,13 +77,18 @@ int
 		return (EXIT_FAILURE);
 	if (!is_valid_input(++av, size_of_stack))
 		exit_with_error();
-	nums = convert_to_nums(av, size_of_stack);
-	if (!nums)
+	head = convert_to_blists(av, size_of_stack);
+	if (!head)
 		return (EXIT_FAILURE);
 	i = 0;
+	current = head;
 	while (i < size_of_stack)
-		printf("%d\n", nums[i++]);
-	free(nums);
-	nums = NULL;
+	{
+		printf("%d\n", *((int *)(current->content)));
+		i++;
+		current = current->next;
+	}
+	ft_blstclear(&head, free);
+	head = NULL;
 	return (EXIT_SUCCESS);
 }

@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_blstnew.c                                       :+:      :+:    :+:   */
+/*   ft_blstclear.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/12 14:24:00 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/12 14:50:23 by tnishina         ###   ########.fr       */
+/*   Created: 2021/09/12 15:10:14 by tnishina          #+#    #+#             */
+/*   Updated: 2021/09/12 15:10:15 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_blist
-	*ft_blstnew(void *content)
+void
+	ft_blstclear(t_blist **blst, void (*del)(void *))
 {
-	t_blist	*new;
+	t_blist	*current;
+	t_blist	*tmp;
 
-	new = (t_blist *)malloc(sizeof(t_blist));
-	if (!new)
-		return (NULL);
-	new->content = content;
-	new->prev = new;
-	new->next = new;
-	return (new);
+	if (blst && (*del))
+	{
+		current = *blst;
+		while (current)
+		{
+			tmp = current->next;
+			ft_blstdelone(current, del);
+			current = tmp;
+		}
+		*blst = NULL;
+	}
 }

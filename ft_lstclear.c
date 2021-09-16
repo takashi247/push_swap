@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnishina <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:43:28 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/11 16:43:28 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/16 22:46:58 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void
 	t_list	*current;
 	t_list	*tmp;
 
-	if (lst && (*del))
+	if (lst)
 	{
 		current = *lst;
 		while (current)

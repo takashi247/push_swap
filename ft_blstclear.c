@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 15:10:14 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/12 17:06:12 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/16 22:48:35 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,20 @@ void
 {
 	t_blist	*current;
 	t_blist	*tmp;
+	int		i;
+	int		n;
 
 	if (blst)
 	{
-		(*blst)->prev->next = NULL;
+		i = 0;
+		n = ft_blstsize(*blst);
 		current = *blst;
-		while (current)
+		while (i < n)
 		{
 			tmp = current->next;
 			ft_blstdelone(current, del);
 			current = tmp;
+			i++;
 		}
 		*blst = NULL;
 	}

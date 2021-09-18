@@ -4,7 +4,11 @@ CC			:= gcc
 
 CFLAGS		:= -Wall -Wextra -Werror
 
-SRCS		:= push_swap.c
+SRCS		:= push_swap.c \
+				sort_stack.c \
+				sa.c \
+				rotate.c \
+				rev_rotate.c
 
 SRCSDIR		:= ./srcs/
 

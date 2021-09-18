@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:28:12 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/16 22:53:47 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/18 23:48:26 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static t_bool
 	is_valid_input(char **av, const int size_of_stack)
 {
 	int		i;
+	int		j;
 	char	*s;
 
 	i = 0;
@@ -60,6 +61,13 @@ static t_bool
 		s = av[i];
 		if (!ft_isint(s))
 			return (FALSE);
+		j = 0;
+		while (j < i)
+		{
+			if (!ft_strncmp(av[i], av[j], ft_strlen(av[i]) + 1))
+				return (FALSE);
+			j++;
+		}
 		i++;
 	}
 	return (TRUE);
@@ -71,7 +79,7 @@ static void
 	int	i;
 
 	i = 0;
-	while(i < size_of_stack)
+	while (i < size_of_stack)
 	{
 		printf("%d\n", *((int *)(head->content)));
 		i++;
@@ -103,10 +111,13 @@ int
 	stack_a = convert_to_blists(av, size_of_stack);
 	if (!stack_a)
 		return (EXIT_FAILURE);
+	ft_putendl_fd("---before sort---", STDOUT_FILENO);
 	show_stack(stack_a, size_of_stack); // for debug
 	actions = NULL;
 	ft_sort_stack(&stack_a, &actions, size_of_stack);
+	ft_putendl_fd("---after sort---", STDOUT_FILENO);
 	show_stack(stack_a, size_of_stack); // for debug
+	ft_putendl_fd("---actions taken---", STDOUT_FILENO);
 	show_actions(actions);
 	ft_lstclear(&actions, NULL);
 	actions = NULL;

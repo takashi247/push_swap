@@ -8,7 +8,13 @@ SRCS		:= push_swap.c \
 				sort_stack.c \
 				sa.c \
 				rotate.c \
-				rev_rotate.c
+				rev_rotate.c \
+				push.c \
+				sort_two.c \
+				sort_three.c \
+				sort_five.c \
+				sort_utils.c \
+				sort_four.c
 
 SRCSDIR		:= ./srcs/
 

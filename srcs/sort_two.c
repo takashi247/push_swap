@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rev_rotate.c                                       :+:      :+:    :+:   */
+/*   sort_two.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/18 01:44:51 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/18 10:41:43 by tnishina         ###   ########.fr       */
+/*   Created: 2021/09/18 11:37:51 by tnishina          #+#    #+#             */
+/*   Updated: 2021/09/18 11:38:23 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 void
-	ft_rev_rotate(t_blist **stack, t_list **actions, char c)
+	ft_sort_two(t_blist **stack, t_list **actions)
 {
-	t_list	*new;
+	const int	top = *(int *)(*stack)->content;
+	const int	bottom = *(int *)(*stack)->next->content;
 
-	if (stack && actions)
-	{
-		*stack = (*stack)->prev;
-		if (c == 'A')
-			new = ft_lstnew("rra");
-		else
-			new = ft_lstnew("rrb");
-		if (!new)
-			exit(EXIT_FAILURE);
-		ft_lstadd_back(actions, new);
-	}
+	if (top > bottom)
+		ft_swap(stack, actions, 'A');
 }

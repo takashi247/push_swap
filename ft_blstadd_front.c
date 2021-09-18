@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 14:33:03 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/12 14:42:45 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/18 17:16:32 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void
 		else
 		{
 			new->prev = (*blst)->prev;
+			(*blst)->prev->next = new;
 			new->next = (*blst);
 			(*blst)->prev = new;
 			*blst = new;

@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:28:12 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/19 18:03:36 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/19 19:05:01 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,13 +115,8 @@ int
 	if (!stack_a)
 		return (EXIT_FAILURE);
 	ft_convert_to_index(stack_a, ps.all_size);
-	// ft_putendl_fd("---before sort---", STDOUT_FILENO);
-	// show_stack(stack_a, ac - 1); // for debug
 	stack_b = NULL;
-	ft_sort_stack(&stack_a, &stack_b, &ps, 'A');
-	// ft_putendl_fd("---after sort---", STDOUT_FILENO);
-	// show_stack(stack_a, ac - 1); // for debug
-	// ft_putendl_fd("---actions taken---", STDOUT_FILENO);
+	ft_sort_stack(&stack_a, &stack_b, &ps, TRUE);
 	show_actions(ps.actions);
 	ft_lstclear(&(ps.actions), NULL);
 	ps.actions = NULL;

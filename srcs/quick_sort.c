@@ -6,14 +6,14 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 08:40:59 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/19 18:31:51 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/19 20:34:06 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static void
-	halve_stack(t_blist **a, t_blist **b, t_ps *ps, char c)
+	halve_stack(t_blist **a, t_blist **b, t_ps *ps, t_bool is_a)
 {
 	const int	size_a = ft_blstsize(*a);
 	const int	pivot = (ft_get_max(*a) + ft_get_min(*a)) / 2;
@@ -24,14 +24,12 @@ static void
 	i = 0;
 	while (i < size_a)
 	{
-		if (c == 'B' && *(int *)(*a)->content <= pivot)
-			ft_push(a, b, &(ps->actions), c);
-		else if (c == 'A' && pivot < *(int *)(*a)->content)
-			ft_push(a, b, &(ps->actions), c);
-		else if (c == 'A')
-			ft_rotate(a, &(ps->actions), 'B');
-		else if (c == 'B')
-			ft_rotate(a, &(ps->actions), 'A');
+		if (is_a && *(int *)(*a)->content <= pivot)
+			ft_push(a, b, &(ps->actions), is_a);
+		else if (!is_a && pivot < *(int *)(*a)->content)
+			ft_push(a, b, &(ps->actions), is_a);
+		else
+			ft_rotate(a, &(ps->actions), is_a);
 		i++;
 	}
 	p_size = (int *)malloc(sizeof(int));
@@ -50,13 +48,13 @@ static void
 	t_list	*tmp;
 
 	if (!ps->p_sizes)
-		halve_stack(a, b, ps, 'B');
+		halve_stack(a, b, ps, TRUE);
 	else
 	{
 		i = 0;
 		while (i < *(int *)ps->p_sizes->content)
 		{
-			ft_push(a, b, &(ps->actions), 'B');
+			ft_push(a, b, &(ps->actions), TRUE);
 			i++;
 		}
 		tmp = ps->p_sizes;
@@ -73,8 +71,8 @@ static void
 	i = 0;
 	while (i < size)
 	{
-		ft_push(b, a, &(ps->actions), 'A');
-		ft_rotate(a, &(ps->actions), 'A');
+		ft_push(b, a, &(ps->actions), FALSE);
+		ft_rotate(a, &(ps->actions), TRUE);
 		i++;
 	}
 	*b = NULL;
@@ -92,11 +90,11 @@ void
 		size = ft_blstsize(*b);
 		while (MAX_SORTSIZE < size)
 		{
-			halve_stack(b, a, ps, 'A');
+			halve_stack(b, a, ps, FALSE);
 			size = ft_blstsize(*b);
 		}
 		ps->sub_size = size;
-		ft_sort_stack(b, a, ps, 'B');
+		ft_sort_stack(b, a, ps, FALSE);
 		clear_b(b, a, ps, size);
 	}
 }

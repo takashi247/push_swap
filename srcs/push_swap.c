@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:28:12 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/18 23:48:26 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/19 18:03:36 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,26 +73,26 @@ static t_bool
 	return (TRUE);
 }
 
-static void
-	show_stack(t_blist *head, int size_of_stack)
-{
-	int	i;
+// static void
+// 	show_stack(t_blist *head, int size_of_stack)
+// {
+// 	int	i;
 
-	i = 0;
-	while (i < size_of_stack)
-	{
-		printf("%d\n", *((int *)(head->content)));
-		i++;
-		head = head->next;
-	}
-}
+// 	i = 0;
+// 	while (i < size_of_stack)
+// 	{
+// 		printf("%d\n", *((int *)(head->content)));
+// 		i++;
+// 		head = head->next;
+// 	}
+// }
 
 static void
 	show_actions(t_list *actions)
 {
 	while (actions)
 	{
-		ft_putendl_fd(actions->content, STDIN_FILENO);
+		ft_putendl_fd(actions->content, STDOUT_FILENO);
 		actions = actions->next;
 	}
 }
@@ -101,27 +101,33 @@ int
 	main(int ac, char **av)
 {
 	t_blist		*stack_a;
-	t_list		*actions;
-	const int	size_of_stack = ac - 1;
+	t_blist		*stack_b;
+	t_ps		ps;
 
-	if (!size_of_stack)
+	ft_bzero(&ps, sizeof(ps));
+	ps.all_size = ac - 1;
+	ps.sub_size = ps.all_size;
+	if (!ps.all_size)
 		return (EXIT_FAILURE);
-	if (!is_valid_input(++av, size_of_stack))
+	if (!is_valid_input(++av, ps.all_size))
 		exit_with_error();
-	stack_a = convert_to_blists(av, size_of_stack);
+	stack_a = convert_to_blists(av, ps.all_size);
 	if (!stack_a)
 		return (EXIT_FAILURE);
-	ft_putendl_fd("---before sort---", STDOUT_FILENO);
-	show_stack(stack_a, size_of_stack); // for debug
-	actions = NULL;
-	ft_sort_stack(&stack_a, &actions, size_of_stack);
-	ft_putendl_fd("---after sort---", STDOUT_FILENO);
-	show_stack(stack_a, size_of_stack); // for debug
-	ft_putendl_fd("---actions taken---", STDOUT_FILENO);
-	show_actions(actions);
-	ft_lstclear(&actions, NULL);
-	actions = NULL;
+	ft_convert_to_index(stack_a, ps.all_size);
+	// ft_putendl_fd("---before sort---", STDOUT_FILENO);
+	// show_stack(stack_a, ac - 1); // for debug
+	stack_b = NULL;
+	ft_sort_stack(&stack_a, &stack_b, &ps, 'A');
+	// ft_putendl_fd("---after sort---", STDOUT_FILENO);
+	// show_stack(stack_a, ac - 1); // for debug
+	// ft_putendl_fd("---actions taken---", STDOUT_FILENO);
+	show_actions(ps.actions);
+	ft_lstclear(&(ps.actions), NULL);
+	ps.actions = NULL;
+	ps.p_sizes = NULL;
 	ft_blstclear(&stack_a, free);
 	stack_a = NULL;
+	stack_b = NULL;
 	return (EXIT_SUCCESS);
 }

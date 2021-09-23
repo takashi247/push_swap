@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 00:16:17 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/19 19:09:30 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/20 20:48:15 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ void
 	t_blist	*tmp;
 	t_list	*new;
 
-	if (stack && actions)
+	if (ft_blstsize(*stack) == 2)
+		*stack = (*stack)->next;
+	else
 	{
 		tmp = *stack;
 		*stack = tmp->next;
@@ -28,12 +30,12 @@ void
 		tmp->prev->next = *stack;
 		tmp->prev = *stack;
 		tmp->next->prev = tmp;
-		if (is_a)
-			new = ft_lstnew("sa");
-		else
-			new = ft_lstnew("sb");
-		if (!new)
-			exit(EXIT_FAILURE);
-		ft_lstadd_back(actions, new);
 	}
+	if (is_a)
+		new = ft_lstnew("sa");
+	else
+		new = ft_lstnew("sb");
+	if (!new)
+		exit(EXIT_FAILURE);
+	ft_lstadd_back(actions, new);
 }

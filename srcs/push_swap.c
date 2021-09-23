@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:28:12 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/19 19:05:01 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/23 16:19:40 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,19 @@ static t_bool
 	return (TRUE);
 }
 
-// static void
-// 	show_stack(t_blist *head, int size_of_stack)
-// {
-// 	int	i;
+void
+	ft_show_stack(t_blist *head, int size_of_stack)
+{
+	int	i;
 
-// 	i = 0;
-// 	while (i < size_of_stack)
-// 	{
-// 		printf("%d\n", *((int *)(head->content)));
-// 		i++;
-// 		head = head->next;
-// 	}
-// }
+	i = 0;
+	while (i < size_of_stack)
+	{
+		printf("%d\n", *((int *)(head->content)));
+		i++;
+		head = head->next;
+	}
+}
 
 static void
 	show_actions(t_list *actions)
@@ -116,8 +116,10 @@ int
 		return (EXIT_FAILURE);
 	ft_convert_to_index(stack_a, ps.all_size);
 	stack_b = NULL;
+	// ft_show_stack(stack_a, ps.all_size);
 	ft_sort_stack(&stack_a, &stack_b, &ps, TRUE);
 	show_actions(ps.actions);
+	// ft_show_stack(stack_a, ps.all_size);
 	ft_lstclear(&(ps.actions), NULL);
 	ps.actions = NULL;
 	ps.p_sizes = NULL;

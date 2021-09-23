@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 09:52:32 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/19 22:37:05 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/23 14:21:16 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_ps
 	t_list	*p_sizes;
 	int		n_sorted;
 	int		sub_size;
+	int		next_min;
 }	t_ps;
 
 /* sort_stack.c */
@@ -63,6 +64,7 @@ int		ft_get_max_index(t_blist *stack);
 int		ft_get_min_index(t_blist *stack);
 int		ft_get_max(t_blist *stack);
 int		ft_get_min(t_blist *stack);
+int		ft_get_index(t_blist *stack, int num);
 
 /* sort_four.c */
 void	ft_sort_four(t_blist **a, t_blist **b, t_list **actions, t_bool is_a);
@@ -72,5 +74,8 @@ void	ft_convert_to_index(t_blist *a, const int size_of_stack);
 
 /* quick_sort.c */
 void	ft_quick_sort(t_blist **a, t_blist **b, t_ps *ps);
+
+/* push_swap.c */
+void	ft_show_stack(t_blist *head, int size_of_stack);
 
 #endif

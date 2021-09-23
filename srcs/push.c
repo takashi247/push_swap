@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 16:34:01 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/19 22:47:36 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/23 15:57:26 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ void
 	t_blist	*prev;
 	int		*num;
 	t_list	*last;
+	int		from_size;
 
+	from_size = ft_blstsize(*from);
 	num = (int *)malloc(sizeof(int));
 	if (num)
 		*num = *(int *)(*from)->content;
@@ -69,6 +71,8 @@ void
 	ft_blstdelone((*from)->prev, free);
 	(*from)->prev = prev;
 	(*from)->prev->next = *from;
+	if (from_size == 1)
+		*from = NULL;
 	ft_blstadd_front(to, new);
 	last = ft_lstlast(*actions);
 	if (last && ((is_a && !ft_strncmp(last->content, "pa", 3))

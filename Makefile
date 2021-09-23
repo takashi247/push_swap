@@ -80,7 +80,7 @@ OBJS_BONUS	:= $(SRCS_BONUS:.c=.o)
 
 OBJS_PLUS	:= $(SRCS_PLUS:.c=.o)
 
-# DEBUG := -g -fsanitize=address
+DEBUG := -g
 
 all: 		$(NAME)
 
@@ -94,7 +94,7 @@ plus: 		$(OBJS) $(OBJS_BONUS) $(OBJS_PLUS)
 	$(AR) $(ARFLAGS) $(NAME) $(OBJS) $(OBJS_BONUS) $(OBJS_PLUS)
 
 .c.o:
-	$(CC) $(CFLAGS) -c $^ -o $@
+	$(CC) $(CFLAGS) $(DEBUG) -c $^ -o $@
 
 clean:
 	rm -f $(OBJS) $(OBJS_BONUS) $(OBJS_PLUS)

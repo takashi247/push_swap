@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 09:52:32 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/23 14:21:16 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/23 18:02:04 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct s_ps
 	int		n_sorted;
 	int		sub_size;
 	int		next_min;
+	int		pivot;
+	int		next_pivot;
 }	t_ps;
 
 /* sort_stack.c */
@@ -74,6 +76,9 @@ void	ft_convert_to_index(t_blist *a, const int size_of_stack);
 
 /* quick_sort.c */
 void	ft_quick_sort(t_blist **a, t_blist **b, t_ps *ps);
+
+/* action_utils.c */
+void	ft_delete_action(t_list **actions);
 
 /* push_swap.c */
 void	ft_show_stack(t_blist *head, int size_of_stack);

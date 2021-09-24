@@ -6,7 +6,7 @@ CFLAGS		:= -Wall -Wextra -Werror
 
 SRCS		:= push_swap.c \
 				sort_stack.c \
-				sa.c \
+				swap.c \
 				rotate.c \
 				rev_rotate.c \
 				push.c \
@@ -16,7 +16,8 @@ SRCS		:= push_swap.c \
 				sort_utils.c \
 				sort_four.c \
 				convert_to_index.c \
-				quick_sort.c
+				quick_sort.c \
+				action_utils.c
 
 SRCSDIR		:= ./srcs/
 

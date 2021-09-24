@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 08:40:59 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/23 16:41:16 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/23 18:15:49 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,14 @@ static void
 	halve_stack(t_blist **a, t_blist **b, t_ps *ps, t_bool is_a)
 {
 	int			size_a;
-	const int	pivot = (ft_get_max(*a) + ft_get_min(*a)) / 2;
 	t_list		*new;
 	int			*p_size;
 	int			i;
 	int			min_loc;
 	int			count;
 
+	ps->pivot = (ft_get_max(*a) + ft_get_min(*a)) / 2;
+	ps->next_pivot = ps->pivot / 2;
 	i = -1;
 	size_a = ft_blstsize(*a);
 	count = 0;
@@ -98,9 +99,9 @@ static void
 	{
 		if (*(int *)(*a)->content == ps->next_min)
 			rotate_n_keep(a, b, ps, is_a);
-		else if (is_a && *(int *)(*a)->content <= pivot)
+		else if (is_a && *(int *)(*a)->content <= ps->pivot)
 			ft_push(a, b, &(ps->actions), is_a);
-		else if (!is_a && pivot < *(int *)(*a)->content)
+		else if (!is_a && ps->pivot < *(int *)(*a)->content)
 		{
 			ft_push(a, b, &(ps->actions), is_a);
 			count++;
@@ -109,7 +110,11 @@ static void
 		{
 			ft_rotate(a, &(ps->actions), is_a);
 			if (is_a)
+			{
+				if (*b && *(int *)(*b)->content <= ps->next_pivot)
+					ft_rotate(b, &(ps->actions), !is_a);
 				count++;
+			}
 		}
 	}
 	p_size = (int *)malloc(sizeof(int));
@@ -129,6 +134,8 @@ static void
 			while (i < min_loc + 1)
 			{
 				ft_rotate(a, &(ps->actions), is_a);
+				if (is_a && *b && *(int *)(*b)->content <= ps->next_pivot)
+					ft_rotate(b, &(ps->actions), !is_a);
 				i++;
 			}
 		}

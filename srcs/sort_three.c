@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 11:39:47 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/25 19:31:15 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/26 02:02:47 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,28 @@ void
 	const int	middle = *(int *)(*a)->next->content;
 	const int	bottom = *(int *)(*a)->next->next->content;
 
-	if (top < middle && middle < bottom)
+	if (top > bottom && bottom > middle)
 	{
+		ft_push(a, b, actions, is_a);
 		ft_swap(a, actions, is_a);
-		ft_rev_rotate(a, actions, is_a);
+		ft_push(a, b, actions, is_a);
+		ft_push(a, b, actions, is_a);
 	}
-	else if (middle > bottom && bottom > top)
-		ft_rotate(a, actions, is_a);
-	else if (bottom > top && top > middle)
-		ft_rev_rotate(a, actions, is_a);
-	else if (middle > top && top > bottom)
-		ft_swap(a, actions, is_a);
-	else if (top > bottom && bottom > middle)
+	else
 	{
-		ft_rev_rotate(a, actions, is_a);
-		ft_swap(a, actions, is_a);
+		if (top < middle && middle < bottom)
+		{
+			ft_swap(a, actions, is_a);
+			ft_rev_rotate(a, actions, is_a);
+		}
+		else if (middle > bottom && bottom > top)
+			ft_rotate(a, actions, is_a);
+		else if (bottom > top && top > middle)
+			ft_rev_rotate(a, actions, is_a);
+		else if (middle > top && top > bottom)
+			ft_swap(a, actions, is_a);
+		push_three(a, b, actions, is_a);
 	}
-	push_three(a, b, actions, is_a);
 }
 
 void
@@ -60,8 +65,6 @@ void
 	const int	middle = *(int *)(*a)->next->content;
 	const int	bottom = *(int *)(*a)->next->next->content;
 
-	// if (!is_a && ft_is_rev_sorted(*a))
-	// 	push_three(a, b, actions, is_a);
 	if (!is_a)
 		ft_rev_sort_n_push_three(a, b, actions, is_a);
 	else

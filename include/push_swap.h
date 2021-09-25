@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 09:52:32 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/25 19:22:34 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/26 00:21:19 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
 
 # define ERR_MSG "Error\n"
 # define MAX_SORTSIZE 5
-# define MAX_MOVE 11
+# define MAX_MOVE 8
 # define MIN_SEARCH 2
+# define MIN_BLIST_SIZE 4
 
 /* structure for push_swap */
 

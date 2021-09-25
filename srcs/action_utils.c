@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 18:01:09 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/23 18:01:37 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/26 07:17:01 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,18 @@ void
 {
 	t_list	*pre_last;
 	t_list	*last;
+	int		size;
 
-	if (ft_lstsize(*actions) == 1)
+	size = ft_lstsize(*actions);
+	if (size == 1)
 	{
 		ft_lstdelone(*actions, NULL);
 		*actions = NULL;
+	}
+	else if (size == 2)
+	{
+		ft_lstdelone((*actions)->next, NULL);
+		(*actions)->next = NULL;
 	}
 	else
 	{

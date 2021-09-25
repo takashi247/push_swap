@@ -6,31 +6,59 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 11:40:57 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/25 19:12:19 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/25 22:44:12 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static int
+	get_second_max(t_blist *stack, int max_i)
+{
+	int			i;
+	const int	n = ft_blstsize(stack);
+	int			second_max;
+
+	if (max_i != 0)
+	{
+		i = 0;
+		second_max = *(int *)stack->content;
+	}
+	else
+	{
+		i = 1;
+		second_max = *(int *)stack->next->content;
+	}
+	while (i < n)
+	{
+		if (i != max_i && second_max < *(int *)stack->content)
+			second_max = *(int *)stack->content;
+		stack = stack->next;
+		i++;
+	}
+	return (second_max);
+}
 
 static void
 	push_n_rotate(t_blist **a, t_blist **b, t_list **actions, t_bool is_a)
 {
 	const int	max = ft_get_max(*a);
 	const int	max_i = ft_get_index(*a, max);
-	const int	next_max_i = ft_get_index(*a, max - 1);
+	const int	second_max = get_second_max(*a, max_i);
+	const int	second_max_i = ft_get_index(*a, second_max);
 
 	ft_push(a, b, actions, is_a);
-	if (max_i == 2 || next_max_i == 2)
+	if (max_i == 2 || second_max_i == 2)
 		ft_rotate(a, actions, is_a);
-	else if (max_i == 3 || next_max_i == 3)
+	else if (max_i == 3 || second_max_i == 3)
 	{
 		ft_rotate(a, actions, is_a);
 		ft_rotate(a, actions, is_a);
 	}
-	else if (max_i == 4 || next_max_i == 4)
+	else if (max_i == 4 || second_max_i == 4)
 		ft_rev_rotate(a, actions, is_a);
 	ft_push(a, b, actions, is_a);
-	if (next_max_i == 0)
+	if (second_max_i == 0)
 		ft_swap(b, actions, !is_a);
 }
 
@@ -39,28 +67,29 @@ static void
 {
 	const int	max = ft_get_max(*a);
 	const int	max_i = ft_get_index(*a, max);
-	const int	next_max_i = ft_get_index(*a, max - 1);
+	const int	second_max = get_second_max(*a, max_i);
+	const int	second_max_i = ft_get_index(*a, second_max);
 
-	if (max_i == 4 || next_max_i == 4)
+	if (max_i == 4 || second_max_i == 4)
 		ft_rev_rotate(a, actions, is_a);
 	else
 		ft_rotate(a, actions, is_a);
-	if (max_i == 1 || next_max_i == 1)
+	if (max_i == 1 || second_max_i == 1)
 		ft_push(a, b, actions, is_a);
-	if ((max_i == 1 && next_max_i == 3) || (max_i == 3 && next_max_i == 1)
-		|| (max_i == 1 && next_max_i == 4) || (max_i == 4 && next_max_i == 1)
-		|| (max_i == 2 && next_max_i == 3) || (max_i == 3 && next_max_i == 2))
+	if ((max_i == 1 && second_max_i == 3) || (max_i == 3 && second_max_i == 1)
+		|| (max_i == 1 && second_max_i == 4) || (max_i == 4 && second_max_i == 1)
+		|| (max_i == 2 && second_max_i == 3) || (max_i == 3 && second_max_i == 2))
 		ft_rotate(a, actions, is_a);
-	if ((max_i == 2 && next_max_i == 3) || (max_i == 3 && next_max_i == 2)
-		|| (max_i == 2 && next_max_i == 4) || (max_i == 4 && next_max_i == 2)
-		|| (max_i == 3 && next_max_i == 4) || (max_i == 4 && next_max_i == 3))
+	if ((max_i == 2 && second_max_i == 3) || (max_i == 3 && second_max_i == 2)
+		|| (max_i == 2 && second_max_i == 4) || (max_i == 4 && second_max_i == 2)
+		|| (max_i == 3 && second_max_i == 4) || (max_i == 4 && second_max_i == 3))
 		ft_push(a, b, actions, is_a);
-	if ((max_i == 2 && next_max_i == 4) || (max_i == 4 && next_max_i == 2))
+	if ((max_i == 2 && second_max_i == 4) || (max_i == 4 && second_max_i == 2))
 	{
 		ft_rotate(a, actions, is_a);
 		ft_rotate(a, actions, is_a);
 	}
-	else if ((max_i == 3 && next_max_i == 4) || (max_i == 4 && next_max_i == 3))
+	else if ((max_i == 3 && second_max_i == 4) || (max_i == 4 && second_max_i == 3))
 		ft_rev_rotate(a, actions, is_a);
 	ft_push(a, b, actions, is_a);
 	if (*(int *)(*b)->content > *(int *)(*b)->next->content)
@@ -72,9 +101,10 @@ static void
 {
 	const int	max = ft_get_max(*a);
 	const int	max_i = ft_get_index(*a, max);
-	const int	next_max_i = ft_get_index(*a, max - 1);
+	const int	second_max = get_second_max(*a, max_i);
+	const int	second_max_i = ft_get_index(*a, second_max);
 
-	if (max_i == 0 || next_max_i == 0)
+	if (max_i == 0 || second_max_i == 0)
 		push_n_rotate(a, b, actions, is_a);
 	else
 		rotate_n_push(a, b, actions, is_a);

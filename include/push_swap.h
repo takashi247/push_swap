@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 09:52:32 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/23 18:02:04 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/25 19:22:34 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 
 # define ERR_MSG "Error\n"
 # define MAX_SORTSIZE 5
+# define MAX_MOVE 11
+# define MIN_SEARCH 2
 
 /* structure for push_swap */
 
@@ -49,10 +51,12 @@ void	ft_rotate(t_blist **stack, t_list **actions, t_bool is_a);
 void	ft_rev_rotate(t_blist **stack, t_list **actions, t_bool is_a);
 
 /* sort_two.c */
-void	ft_sort_two(t_blist **stack, t_list **actions, t_bool is_a);
+void	ft_sort_two(t_blist **a, t_blist **b, t_list **actions, t_bool is_a);
 
 /* sort_three.c */
-void	ft_sort_three(t_blist **stack, t_list **actions, t_bool is_a);
+void	ft_sort_three(t_blist **a, t_blist **b, t_list **actions, t_bool is_a);
+void	ft_rev_sort_n_push_three(t_blist **a, t_blist **b, t_list **actions,
+			t_bool is_a);
 
 /* push.c */
 void	ft_push(t_blist **from, t_blist **to, t_list **actions, t_bool is_a);
@@ -82,5 +86,9 @@ void	ft_delete_action(t_list **actions);
 
 /* push_swap.c */
 void	ft_show_stack(t_blist *head, int size_of_stack);
+void	ft_show_actions(t_list *actions);
+
+/* sort_utils_2.c */
+t_bool	ft_is_rev_sorted(t_blist *stack);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 01:41:49 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/23 18:09:09 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/25 19:52:35 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,35 @@ void
 	{
 		*stack = (*stack)->next;
 		last = ft_lstlast(*actions);
-		if (last && ((is_a && !ft_strncmp(last->content, "rb", 3))
-				|| (!is_a && !ft_strncmp(last->content, "ra", 3))))
+		if (last && ((is_a && !ft_strncmp(last->content, "rra", 4))
+				|| (!is_a && !ft_strncmp(last->content, "rrb", 4))))
+			ft_delete_action(actions);
+		else if (last && !ft_strncmp(last->content, "rrr", 3))
 		{
 			ft_delete_action(actions);
-			new = ft_lstnew("rr");
+			if (is_a)
+				new = ft_lstnew("rrb");
+			else
+				new = ft_lstnew("rra");
+			if (!new)
+				exit(EXIT_FAILURE);
+			ft_lstadd_back(actions, new);
 		}
-		else if (is_a)
-			new = ft_lstnew("ra");
 		else
-			new = ft_lstnew("rb");
-		if (!new)
-			exit(EXIT_FAILURE);
-		ft_lstadd_back(actions, new);
+		{
+			if (last && ((is_a && !ft_strncmp(last->content, "rb", 3))
+					|| (!is_a && !ft_strncmp(last->content, "ra", 3))))
+			{
+				ft_delete_action(actions);
+				new = ft_lstnew("rr");
+			}
+			else if (is_a)
+				new = ft_lstnew("ra");
+			else
+				new = ft_lstnew("rb");
+			if (!new)
+				exit(EXIT_FAILURE);
+			ft_lstadd_back(actions, new);
+		}
 	}
 }

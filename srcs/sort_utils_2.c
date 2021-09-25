@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_two.c                                         :+:      :+:    :+:   */
+/*   sort_utils_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/18 11:37:51 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/25 15:40:23 by tnishina         ###   ########.fr       */
+/*   Created: 2021/09/25 14:32:42 by tnishina          #+#    #+#             */
+/*   Updated: 2021/09/25 14:33:11 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void
-	ft_sort_two(t_blist **a, t_blist **b, t_list **actions, t_bool is_a)
+t_bool
+	ft_is_rev_sorted(t_blist *stack)
 {
-	const int	top = *(int *)(*a)->content;
-	const int	bottom = *(int *)(*a)->next->content;
 	int			i;
+	const int	n = ft_blstsize(stack);
 
-	if (!is_a && ft_is_rev_sorted(*a))
+	i = 0;
+	while (i < n - 1)
 	{
-		i = -1;
-		while (++i < 2)
-			ft_push(a, b, actions, is_a);
+		if (*(int *)stack->content < *(int *)stack->next->content)
+			return (FALSE);
+		stack = stack->next;
+		i++;
 	}
-	else if (top > bottom)
-		ft_swap(a, actions, is_a);
+	return (TRUE);
 }

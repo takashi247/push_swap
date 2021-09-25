@@ -6,11 +6,60 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 08:40:59 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/23 18:15:49 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/25 20:09:44 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void
+	ft_search_next_min(t_blist **b, t_blist **a, t_ps *ps)
+{
+	int		i;
+	int		j;
+	t_blist	*current;
+
+	if (!b || !(*b))
+		return ;
+	i = 0;
+	current = (*b)->prev;
+	while (current && i < MIN_SEARCH)
+	{
+		if (*(int *)current->content == ps->next_min)
+		{
+			j = 0;
+			while (j < i + 1)
+			{
+				ft_rev_rotate(b, &(ps->actions), FALSE);
+				j++;
+			}
+			ft_push(b, a, &(ps->actions), FALSE);
+			ft_rotate(a, &(ps->actions), TRUE);
+			(ps->next_min)++;
+			(ps->n_sorted)++;
+			j = 0;
+			while (j < i)
+			{
+				if (*(int *)(*b)->content == ps->next_min)
+				{
+					ft_push(b, a, &(ps->actions), FALSE);
+					ft_rotate(a, &(ps->actions), TRUE);
+					(ps->next_min)++;
+					(ps->n_sorted)++;
+					i--;
+				}
+				else
+				{
+					ft_rotate(b, &(ps->actions), FALSE);
+					j++;
+				}
+			}
+			return ;
+		}
+		current = current->prev;
+		i++;
+	}
+}
 
 static void
 	rotate_n_keep(t_blist **a, t_blist **b, t_ps *ps, t_bool is_a)
@@ -26,7 +75,12 @@ static void
 	else
 		base = b;
 	if (!ps->next_min)
+	{
 		ft_rotate(a, &(ps->actions), is_a);
+		(ps->next_min)++;
+		(ps->n_sorted)++;
+		// ft_search_next_min(b, a, ps, NULL);
+	}
 	else
 	{
 		if (is_a)
@@ -54,14 +108,25 @@ static void
 			}
 		}
 		if (is_a)
+		{
 			ft_push(b, a, &(ps->actions), !is_a);
+			ft_rotate(base, &(ps->actions), TRUE);
+			(ps->next_min)++;
+			(ps->n_sorted)++;
+			// ft_search_next_min(b, a, ps, &count);
+		}
 		else
+		{
 			ft_push(a, b, &(ps->actions), is_a);
+			ft_rotate(base, &(ps->actions), TRUE);
+			(ps->next_min)++;
+			(ps->n_sorted)++;
+		}
 		i = 0;
 		len = ft_blstsize(*base);
 		if (len / 2 <= current_min)
 		{
-			while (i < count + 1)
+			while (i < count)
 			{
 				ft_rotate(base, &(ps->actions), TRUE);
 				i++;
@@ -69,15 +134,35 @@ static void
 		}
 		else
 		{
-			while (i < count)
+			while (i < count + 1)
 			{
 				ft_rev_rotate(base, &(ps->actions), TRUE);
 				i++;
 			}
 		}
 	}
-	(ps->next_min)++;
-	(ps->n_sorted)++;
+}
+
+static t_bool
+	is_close_to_tail(t_blist *a, t_blist *b, t_ps *ps, t_bool is_a)
+{
+	t_blist	*base;
+	int		base_len;
+	int		current_min_loc;
+
+	if (is_a)
+		base = a;
+	else
+		base = b;
+	current_min_loc = ft_get_index(base, ps->next_min - 1);
+	base_len = ft_blstsize(base);
+	if ((base_len / 2 <= current_min_loc)
+		&& (MAX_MOVE < base_len - current_min_loc))
+		return (FALSE);
+	else if ((current_min_loc < base_len / 2)
+		&& (MAX_MOVE < current_min_loc))
+		return (FALSE);
+	return (TRUE);
 }
 
 static void
@@ -97,23 +182,29 @@ static void
 	count = 0;
 	while (++i < size_a)
 	{
-		if (*(int *)(*a)->content == ps->next_min)
-			rotate_n_keep(a, b, ps, is_a);
-		else if (is_a && *(int *)(*a)->content <= ps->pivot)
-			ft_push(a, b, &(ps->actions), is_a);
-		else if (!is_a && ps->pivot < *(int *)(*a)->content)
+		if (!is_a)
+			ft_search_next_min(a, b, ps);
+		if (*a)
 		{
-			ft_push(a, b, &(ps->actions), is_a);
-			count++;
-		}
-		else
-		{
-			ft_rotate(a, &(ps->actions), is_a);
-			if (is_a)
+			if (*(int *)(*a)->content == ps->next_min
+				&& is_close_to_tail(*a, *b, ps, is_a))
+				rotate_n_keep(a, b, ps, is_a);
+			else if (is_a && *(int *)(*a)->content <= ps->pivot)
+				ft_push(a, b, &(ps->actions), is_a);
+			else if (!is_a && ps->pivot < *(int *)(*a)->content)
 			{
-				if (*b && *(int *)(*b)->content <= ps->next_pivot)
-					ft_rotate(b, &(ps->actions), !is_a);
+				ft_push(a, b, &(ps->actions), is_a);
 				count++;
+			}
+			else
+			{
+				ft_rotate(a, &(ps->actions), is_a);
+				if (is_a)
+				{
+					if (*b && *(int *)(*b)->content <= ps->next_pivot)
+						ft_rotate(b, &(ps->actions), !is_a);
+					count++;
+				}
 			}
 		}
 	}
@@ -163,7 +254,22 @@ static void
 		i = 0;
 		while (i < *(int *)ps->p_sizes->content)
 		{
-			ft_push(a, b, &(ps->actions), TRUE);
+			if (*(int *)(*a)->content == ps->next_min)
+			{
+				ft_rotate(a, &(ps->actions), TRUE);
+				(ps->next_min)++;
+				(ps->n_sorted)++;
+			}
+			else if (*(int *)(*a)->next->content == ps->next_min
+				&& *(int *)(*a)->content == ps->next_min + 1)
+			{
+				ft_swap(a, &(ps->actions), TRUE);
+				ft_rotate(a, &(ps->actions), TRUE);
+				(ps->next_min)++;
+				(ps->n_sorted)++;
+			}
+			else
+				ft_push(a, b, &(ps->actions), TRUE);
 			i++;
 		}
 		tmp = ps->p_sizes;
@@ -212,6 +318,7 @@ void
 	ft_quick_sort(t_blist **a, t_blist **b, t_ps *ps)
 {
 	int	size;
+	int	i;
 
 	while (ps->n_sorted != ps->all_size)
 	{
@@ -224,6 +331,18 @@ void
 		}
 		ps->sub_size = size;
 		ft_sort_stack(b, a, ps, FALSE);
-		clear_b(b, a, ps, size);
+		if (*b)
+			clear_b(b, a, ps, size);
+		else
+		{
+			i = 0;
+			while (i < size)
+			{
+				ft_rotate(a, &ps->actions, TRUE);
+				(ps->next_min)++;
+				(ps->n_sorted)++;
+				i++;
+			}
+		}
 	}
 }

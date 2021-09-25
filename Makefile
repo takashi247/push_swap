@@ -17,7 +17,8 @@ SRCS		:= push_swap.c \
 				sort_four.c \
 				convert_to_index.c \
 				quick_sort.c \
-				action_utils.c
+				action_utils.c \
+				sort_utils_2.c
 
 SRCSDIR		:= ./srcs/
 

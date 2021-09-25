@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:28:12 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/23 16:19:40 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/25 19:13:11 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ void
 	}
 }
 
-static void
-	show_actions(t_list *actions)
+void
+	ft_show_actions(t_list *actions)
 {
 	while (actions)
 	{
@@ -118,7 +118,7 @@ int
 	stack_b = NULL;
 	// ft_show_stack(stack_a, ps.all_size);
 	ft_sort_stack(&stack_a, &stack_b, &ps, TRUE);
-	show_actions(ps.actions);
+	ft_show_actions(ps.actions);
 	// ft_show_stack(stack_a, ps.all_size);
 	ft_lstclear(&(ps.actions), NULL);
 	ps.actions = NULL;

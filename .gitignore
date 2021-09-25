@@ -55,3 +55,7 @@ Mkfile.old
 dkms.conf
 
 *.DS_Store
+
+# checker and tester
+checker
+push_swap_tester/*

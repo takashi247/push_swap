@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 08:40:59 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/26 08:02:46 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/26 10:24:30 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,7 +294,7 @@ static void
 				ft_rotate(a, &(ps->actions), is_a);
 				if (is_a)
 				{
-					if (*b && *(int *)(*b)->content <= ps->next_pivot)
+					if (*b && *(int *)(*b)->content > ps->next_pivot)
 						ft_rotate(b, &(ps->actions), !is_a);
 					count++;
 				}
@@ -357,6 +357,16 @@ static t_bool
 	}
 	else if (*(int *)(*b)->content == ps->next_min)
 	{
+		ft_push(b, a, &(ps->actions), FALSE);
+		ft_rotate(a, &(ps->actions), TRUE);
+		(ps->next_min)++;
+		(ps->n_sorted)++;
+		return (TRUE);
+	}
+	else if (*(int *)(*b)->next->content == ps->next_min)
+	{
+		if (2 <= ft_blstsize(*b))
+			ft_rotate(b, &(ps->actions), FALSE);
 		ft_push(b, a, &(ps->actions), FALSE);
 		ft_rotate(a, &(ps->actions), TRUE);
 		(ps->next_min)++;

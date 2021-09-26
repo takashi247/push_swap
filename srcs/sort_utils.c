@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 20:27:04 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/19 14:00:39 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/20 00:42:52 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,21 @@ int
 		i++;
 	}
 	return (min_int);
+}
+
+int
+	ft_get_index(t_blist *stack, int num)
+{
+	int			i;
+	const int	n = ft_blstsize(stack);
+
+	i = 0;
+	while (i < n)
+	{
+		if (*(int *)stack->content == num)
+			return (i);
+		stack = stack->next;
+		i++;
+	}
+	return (i);
 }

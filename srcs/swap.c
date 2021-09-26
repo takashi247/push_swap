@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sa.c                                               :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 00:16:17 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/19 19:09:30 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/23 18:09:15 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ void
 {
 	t_blist	*tmp;
 	t_list	*new;
+	t_list	*last;
 
-	if (stack && actions)
+	if (ft_blstsize(*stack) == 2)
+		*stack = (*stack)->next;
+	else
 	{
 		tmp = *stack;
 		*stack = tmp->next;
@@ -28,12 +31,19 @@ void
 		tmp->prev->next = *stack;
 		tmp->prev = *stack;
 		tmp->next->prev = tmp;
-		if (is_a)
-			new = ft_lstnew("sa");
-		else
-			new = ft_lstnew("sb");
-		if (!new)
-			exit(EXIT_FAILURE);
-		ft_lstadd_back(actions, new);
 	}
+	last = ft_lstlast(*actions);
+	if (last && ((is_a && !ft_strncmp(last->content, "sb", 3))
+			|| (!is_a && !ft_strncmp(last->content, "sa", 3))))
+	{
+		ft_delete_action(actions);
+		new = ft_lstnew("ss");
+	}
+	else if (is_a)
+		new = ft_lstnew("sa");
+	else
+		new = ft_lstnew("sb");
+	if (!new)
+		exit(EXIT_FAILURE);
+	ft_lstadd_back(actions, new);
 }

@@ -6,33 +6,84 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 11:39:47 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/19 19:11:43 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/26 02:02:47 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void
-	ft_sort_three(t_blist **stack, t_list **actions, t_bool is_a)
-{
-	const int	top = *(int *)(*stack)->content;
-	const int	middle = *(int *)(*stack)->next->content;
-	const int	bottom = *(int *)(*stack)->next->next->content;
 
-	if (top > middle && bottom > top)
-		ft_swap(stack, actions, is_a);
-	else if (top > middle && middle > bottom)
+static void
+	push_three(t_blist **a, t_blist **b, t_list **actions, t_bool is_a)
+{
+	int	i;
+
+	i = 0;
+	while (i < 3)
 	{
-		ft_swap(stack, actions, is_a);
-		ft_rev_rotate(stack, actions, is_a);
+		ft_push(a, b, actions, is_a);
+		i++;
 	}
-	else if (top > bottom && bottom > middle)
-		ft_rotate(stack, actions, is_a);
-	else if (middle > bottom && bottom > top)
+}
+
+void
+	ft_rev_sort_n_push_three(t_blist **a, t_blist **b, t_list **actions,
+		t_bool is_a)
+{
+	const int	top = *(int *)(*a)->content;
+	const int	middle = *(int *)(*a)->next->content;
+	const int	bottom = *(int *)(*a)->next->next->content;
+
+	if (top > bottom && bottom > middle)
 	{
-		ft_swap(stack, actions, is_a);
-		ft_rotate(stack, actions, is_a);
+		ft_push(a, b, actions, is_a);
+		ft_swap(a, actions, is_a);
+		ft_push(a, b, actions, is_a);
+		ft_push(a, b, actions, is_a);
 	}
-	else if (middle > top && top > bottom)
-		ft_rev_rotate(stack, actions, is_a);
+	else
+	{
+		if (top < middle && middle < bottom)
+		{
+			ft_swap(a, actions, is_a);
+			ft_rev_rotate(a, actions, is_a);
+		}
+		else if (middle > bottom && bottom > top)
+			ft_rotate(a, actions, is_a);
+		else if (bottom > top && top > middle)
+			ft_rev_rotate(a, actions, is_a);
+		else if (middle > top && top > bottom)
+			ft_swap(a, actions, is_a);
+		push_three(a, b, actions, is_a);
+	}
+}
+
+void
+	ft_sort_three(t_blist **a, t_blist **b, t_list **actions, t_bool is_a)
+{
+	const int	top = *(int *)(*a)->content;
+	const int	middle = *(int *)(*a)->next->content;
+	const int	bottom = *(int *)(*a)->next->next->content;
+
+	if (!is_a)
+		ft_rev_sort_n_push_three(a, b, actions, is_a);
+	else
+	{
+		if (top > middle && bottom > top)
+			ft_swap(a, actions, is_a);
+		else if (top > middle && middle > bottom)
+		{
+			ft_swap(a, actions, is_a);
+			ft_rev_rotate(a, actions, is_a);
+		}
+		else if (top > bottom && bottom > middle)
+			ft_rotate(a, actions, is_a);
+		else if (middle > bottom && bottom > top)
+		{
+			ft_swap(a, actions, is_a);
+			ft_rotate(a, actions, is_a);
+		}
+		else if (middle > top && top > bottom)
+			ft_rev_rotate(a, actions, is_a);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 22:05:22 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/19 19:09:48 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/09/25 15:38:50 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void
 		if (ps->sub_size == 1 || is_sorted(*a))
 			return ;
 		else if (ps->sub_size == 2)
-			ft_sort_two(a, &(ps->actions), is_a);
+			ft_sort_two(a, b, &(ps->actions), is_a);
 		else if (ps->sub_size == 3)
-			ft_sort_three(a, &(ps->actions), is_a);
+			ft_sort_three(a, b, &(ps->actions), is_a);
 		else if (ps->sub_size == 4)
 			ft_sort_four(a, b, &(ps->actions), is_a);
 		else if (ps->sub_size == 5)

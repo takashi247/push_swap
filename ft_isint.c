@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 15:30:47 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/12 15:32:10 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/10/03 18:38:28 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_bool
 			sign *= -1;
 		str++;
 	}
-	if (*str == '0' && ft_isdigit(*(str + 1)))
+	if (!*str || (*str == '0' && ft_isdigit(*(str + 1))))
 		return (FALSE);
 	while (ft_isdigit(*str))
 	{

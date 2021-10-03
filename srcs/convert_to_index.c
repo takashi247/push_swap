@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 08:54:36 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/19 12:11:20 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/10/03 09:46:16 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,15 @@ static void
 static void
 	num_qsort(int *nums, int left, int right)
 {
-	const int	pivot_index = (left + right) / 2;
-	const int	pivot = nums[pivot_index];
-	int			i;
-	int			j;
+	int	pivot_index;
+	int	pivot;
+	int	i;
+	int	j;
 
 	if (right - left <= 1)
 		return ;
+	pivot_index = (left + right) / 2;
+	pivot = nums[pivot_index];
 	swap_nums(nums + pivot_index, nums + right - 1);
 	i = left;
 	j = left;

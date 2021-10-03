@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 09:52:32 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/26 10:01:02 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/10/03 15:36:12 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,15 @@ typedef struct s_ps
 	t_list	*actions;
 	int		all_size;
 	t_list	*p_sizes;
-	int		n_sorted;
 	int		sub_size;
 	int		next_min;
 	int		pivot;
 	int		next_pivot;
+	int		min_loc;
+	int		next_min_loc;
+	int		size_a;
+	int		size_b;
+	t_blist	**base;
 }	t_ps;
 
 /* sort_stack.c */
@@ -91,5 +95,31 @@ void	ft_show_actions(t_list *actions);
 
 /* sort_utils_2.c */
 t_bool	ft_is_rev_sorted(t_blist *stack);
+int		ft_get_second_max(t_blist *stack, int max_i);
+
+/* clear_a.c */
+void	ft_clear_a(t_blist **a, t_ps *ps, int size);
+
+/* clear_b.c */
+void	ft_clear_b(t_blist **b, t_blist **a, t_ps *ps, int size);
+
+/* initialize_b.c */
+void	ft_initialize_b(t_blist **a, t_blist **b, t_ps *ps);
+
+/* halve_stack.c */
+void	ft_halve_stack(t_blist **a, t_blist **b, t_ps *ps, t_bool is_a);
+
+/* search_next_min.c */
+t_bool	ft_search_next_min(t_blist **b, t_blist **a, t_ps *ps);
+
+/* rotate_n_keep.c */
+void	ft_rotate_n_keep(t_blist **a, t_blist **b, t_ps *ps, t_bool is_a);
+
+/* reset_stack_position.c */
+void	ft_reset_stack_position(t_blist **a, t_blist **b, t_ps *ps,
+			t_bool is_a);
+
+/* is_pushed_to_a.c */
+t_bool	ft_is_pushed_to_a(t_blist **a, t_blist **b, t_ps *ps, t_bool is_a);
 
 #endif

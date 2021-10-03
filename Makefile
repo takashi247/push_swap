@@ -18,7 +18,15 @@ SRCS		:= push_swap.c \
 				convert_to_index.c \
 				quick_sort.c \
 				action_utils.c \
-				sort_utils_2.c
+				sort_utils_2.c \
+				clear_a.c \
+				clear_b.c \
+				initialize_b.c \
+				search_next_min.c \
+				rotate_n_keep.c \
+				reset_stack_position.c \
+				halve_stack.c \
+				is_pushed_to_a.c
 
 SRCSDIR		:= ./srcs/
 

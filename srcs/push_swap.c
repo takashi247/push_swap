@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:28:12 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/25 19:13:11 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/10/03 15:46:42 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,20 +74,6 @@ static t_bool
 }
 
 void
-	ft_show_stack(t_blist *head, int size_of_stack)
-{
-	int	i;
-
-	i = 0;
-	while (i < size_of_stack)
-	{
-		printf("%d\n", *((int *)(head->content)));
-		i++;
-		head = head->next;
-	}
-}
-
-void
 	ft_show_actions(t_list *actions)
 {
 	while (actions)
@@ -116,10 +102,8 @@ int
 		return (EXIT_FAILURE);
 	ft_convert_to_index(stack_a, ps.all_size);
 	stack_b = NULL;
-	// ft_show_stack(stack_a, ps.all_size);
 	ft_sort_stack(&stack_a, &stack_b, &ps, TRUE);
 	ft_show_actions(ps.actions);
-	// ft_show_stack(stack_a, ps.all_size);
 	ft_lstclear(&(ps.actions), NULL);
 	ps.actions = NULL;
 	ps.p_sizes = NULL;

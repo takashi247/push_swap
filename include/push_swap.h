@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 09:52:32 by tnishina          #+#    #+#             */
-/*   Updated: 2021/10/03 15:36:12 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/10/09 09:13:43 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	ft_delete_action(t_list **actions);
 /* push_swap.c */
 void	ft_show_stack(t_blist *head, int size_of_stack);
 void	ft_show_actions(t_list *actions);
+t_bool	ft_is_valid_input(char **av, const int size_of_stack);
 
 /* sort_utils_2.c */
 t_bool	ft_is_rev_sorted(t_blist *stack);

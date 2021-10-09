@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:28:12 by tnishina          #+#    #+#             */
-/*   Updated: 2021/10/03 15:46:42 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/10/03 18:37:27 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static t_blist
 	return (head);
 }
 
-static t_bool
-	is_valid_input(char **av, const int size_of_stack)
+t_bool
+	ft_is_valid_input(char **av, const int size_of_stack)
 {
 	int		i;
 	int		j;
@@ -95,7 +95,7 @@ int
 	ps.sub_size = ps.all_size;
 	if (!ps.all_size)
 		return (EXIT_FAILURE);
-	if (!is_valid_input(++av, ps.all_size))
+	if (!ft_is_valid_input(++av, ps.all_size))
 		exit_with_error();
 	stack_a = convert_to_blists(av, ps.all_size);
 	if (!stack_a)

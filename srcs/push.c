@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 16:34:01 by tnishina          #+#    #+#             */
-/*   Updated: 2021/10/03 09:46:01 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/10/09 23:03:47 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static t_bool
 	return (TRUE);
 }
 
-static void
-	push_stack(t_blist **from, t_blist **to)
+void
+	ft_push_stack(t_blist **from, t_blist **to)
 {
 	int		from_size;
 	t_blist	*new;
@@ -52,7 +52,7 @@ void
 {
 	t_list	*last;
 
-	push_stack(from, to);
+	ft_push_stack(from, to);
 	last = ft_lstlast(*actions);
 	if (last && ((is_a && !ft_strncmp(last->content, "pa", 3))
 			|| (!is_a && !ft_strncmp(last->content, "pb", 3))))

@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 14:32:42 by tnishina          #+#    #+#             */
-/*   Updated: 2021/10/03 15:48:45 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/10/10 13:19:27 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int
 	{
 		i = 1;
 		second_max = *(int *)stack->next->content;
+		stack = stack->next;
 	}
 	while (i < n)
 	{
@@ -54,4 +55,21 @@ int
 		i++;
 	}
 	return (second_max);
+}
+
+t_bool
+	ft_is_sorted(t_blist *stack)
+{
+	int			i;
+	const int	n = ft_blstsize(stack);
+
+	i = 0;
+	while (i < n - 1)
+	{
+		if (*(int *)stack->content > *(int *)stack->next->content)
+			return (FALSE);
+		stack = stack->next;
+		i++;
+	}
+	return (TRUE);
 }

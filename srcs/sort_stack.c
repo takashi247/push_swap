@@ -6,35 +6,18 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 22:05:22 by tnishina          #+#    #+#             */
-/*   Updated: 2021/09/25 15:38:50 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/10/10 01:05:54 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static t_bool
-	is_sorted(t_blist *stack)
-{
-	int			i;
-	const int	n = ft_blstsize(stack);
-
-	i = 0;
-	while (i < n - 1)
-	{
-		if (*(int *)stack->content > *(int *)stack->next->content)
-			return (FALSE);
-		stack = stack->next;
-		i++;
-	}
-	return (TRUE);
-}
 
 void
 	ft_sort_stack(t_blist **a, t_blist **b, t_ps *ps, t_bool is_a)
 {
 	if (a && b && ps)
 	{
-		if (ps->sub_size == 1 || is_sorted(*a))
+		if (ps->sub_size == 1 || ft_is_sorted(*a))
 			return ;
 		else if (ps->sub_size == 2)
 			ft_sort_two(a, b, &(ps->actions), is_a);

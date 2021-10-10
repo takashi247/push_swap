@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 11:40:57 by tnishina          #+#    #+#             */
-/*   Updated: 2021/10/02 14:23:50 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/10/10 13:20:27 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void
 	else if (max_i == 4 || sec_max_i == 4)
 		ft_rev_rotate(a, actions, is_a);
 	ft_push(a, b, actions, is_a);
-	if (sec_max_i == 0)
+	if (*(int *)(*b)->content > *(int *)(*b)->next->content)
 		ft_swap(b, actions, !is_a);
 }
 

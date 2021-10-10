@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 09:52:32 by tnishina          #+#    #+#             */
-/*   Updated: 2021/10/09 09:13:43 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/10/10 11:31:32 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "libft.h"
+# include "get_next_line.h"
 
 # include <stdio.h> // need to delete
 
 # define ERR_MSG "Error\n"
+# define OK_MSG "OK\n"
+# define KO_MSG "KO\n"
 # define MAX_SORTSIZE 5
 # define MAX_MOVE 5
 # define MIN_SEARCH 2
@@ -48,6 +51,7 @@ void	ft_sort_stack(t_blist **a, t_blist **b, t_ps *ps, t_bool is_a);
 
 /* sa.c */
 void	ft_swap(t_blist **stack, t_list **actions, t_bool is_a);
+void	ft_swap_stack(t_blist **stack);
 
 /* rotate.c */
 void	ft_rotate(t_blist **stack, t_list **actions, t_bool is_a);
@@ -65,6 +69,7 @@ void	ft_rev_sort_n_push_three(t_blist **a, t_blist **b, t_list **actions,
 
 /* push.c */
 void	ft_push(t_blist **from, t_blist **to, t_list **actions, t_bool is_a);
+void	ft_push_stack(t_blist **from, t_blist **to);
 
 /* sort_five.c */
 void	ft_sort_five(t_blist **a, t_blist **b, t_list **actions,
@@ -89,14 +94,15 @@ void	ft_quick_sort(t_blist **a, t_blist **b, t_ps *ps);
 /* action_utils.c */
 void	ft_delete_action(t_list **actions);
 
-/* push_swap.c */
-void	ft_show_stack(t_blist *head, int size_of_stack);
-void	ft_show_actions(t_list *actions);
+/* main_utils.c */
 t_bool	ft_is_valid_input(char **av, const int size_of_stack);
+void	ft_exit_with_error(void);
+t_blist	*ft_convert_to_blists(char **av, const int size_of_stack);
 
 /* sort_utils_2.c */
 t_bool	ft_is_rev_sorted(t_blist *stack);
 int		ft_get_second_max(t_blist *stack, int max_i);
+t_bool	ft_is_sorted(t_blist *stack);
 
 /* clear_a.c */
 void	ft_clear_a(t_blist **a, t_ps *ps, int size);
@@ -122,5 +128,12 @@ void	ft_reset_stack_position(t_blist **a, t_blist **b, t_ps *ps,
 
 /* is_pushed_to_a.c */
 t_bool	ft_is_pushed_to_a(t_blist **a, t_blist **b, t_ps *ps, t_bool is_a);
+
+/* checker_utils.c */
+void	ft_is_fully_sorted(t_blist *a, t_blist *b);
+void	ft_safe_free(char **str);
+
+/* do_instruction.c */
+void	ft_do_instruction(t_blist **a, t_blist **b, const char *instruction);
 
 #endif

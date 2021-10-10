@@ -1,5 +1,7 @@
 # Program name
 push_swap
+checker
+checker_mac
 
 # Prerequisites
 *.d
@@ -55,6 +57,7 @@ Mkfile.old
 dkms.conf
 
 *.DS_Store
+.vscode
 
 # checker and tester
 checker

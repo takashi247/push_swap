@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 11:26:51 by tnishina          #+#    #+#             */
-/*   Updated: 2021/10/10 12:43:27 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/10/10 18:54:50 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 static void
 	do_reverse_instruction(t_blist **a, t_blist **b, const char *instruction)
 {
-	if (!ft_strncmp(instruction, "ra", 3))
+	if (!ft_strncmp(instruction, "ra", 3) && *a)
 		*a = (*a)->next;
-	else if (!ft_strncmp(instruction, "rb", 3))
+	else if (!ft_strncmp(instruction, "rb", 3) && *b)
 		*b = (*b)->next;
-	else if (!ft_strncmp(instruction, "rr", 3))
+	else if (!ft_strncmp(instruction, "rr", 3) && *a && *b)
 	{
 		*a = (*a)->next;
 		*b = (*b)->next;
 	}
-	else if (!ft_strncmp(instruction, "rra", 4))
+	else if (!ft_strncmp(instruction, "rra", 4) && *a)
 		*a = (*a)->prev;
-	else if (!ft_strncmp(instruction, "rrb", 4))
+	else if (!ft_strncmp(instruction, "rrb", 4) && *b)
 		*b = (*b)->prev;
-	else
+	else if (*a && *b)
 	{
 		*a = (*a)->prev;
 		*b = (*b)->prev;

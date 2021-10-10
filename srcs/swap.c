@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 00:16:17 by tnishina          #+#    #+#             */
-/*   Updated: 2021/10/09 22:49:14 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/10/10 18:51:30 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void
 {
 	t_blist	*tmp;
 
+	if (!stack || !(*stack))
+		return ;
 	if (ft_blstsize(*stack) == 2)
 		*stack = (*stack)->next;
 	else

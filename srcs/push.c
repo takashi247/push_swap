@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 16:34:01 by tnishina          #+#    #+#             */
-/*   Updated: 2021/10/09 23:03:47 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/10/10 22:47:24 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void
 	t_blist	*new;
 	t_blist	*prev;
 
+	if (!from || !(*from))
+		return ;
 	from_size = ft_blstsize(*from);
 	prev = (*from)->prev;
 	*from = (*from)->next;

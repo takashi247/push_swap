@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 01:41:49 by tnishina          #+#    #+#             */
-/*   Updated: 2021/10/02 14:47:19 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/10/10 22:48:26 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void
 
 	if (stack && actions)
 	{
-		*stack = (*stack)->next;
+		if (*stack)
+			*stack = (*stack)->next;
 		last = ft_lstlast(*actions);
 		if (last && ((is_a && !ft_strncmp(last->content, "rra", 4))
 				|| (!is_a && !ft_strncmp(last->content, "rrb", 4))))

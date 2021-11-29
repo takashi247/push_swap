@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 08:54:36 by tnishina          #+#    #+#             */
-/*   Updated: 2021/10/03 09:46:16 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/11/28 09:24:08 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,69 @@ static void
 	*b = tmp;
 }
 
+/*
+** To run quick sort
+**
+** 1. Determine the pivot
+**
+**  [10] [12] [15] [3] [8] [17] [4] [1]
+**                      p
+**
+** 2. Swap the pivot with the one in the right edge and start i, j from the left
+**
+**                      *----swap----*
+**  [10] [12] [15] [3] [1] [17] [4] [8]
+**   i,j                             p
+**
+** 3. Increment j if num[j] >= pivot
+**
+**  [10] [12] [15] [3] [1] [17] [4] [8]
+**   i -----------> j                p
+**
+** 4. Swap num[i] and num[j] and increment i if num[j] < pivot
+**
+**   *----swap-----*
+**  [3] [12] [15] [10] [1] [17] [4] [8]
+**   --> i         j                 p
+**
+** 5. Again, increment j if num[j] >= pivot
+**
+**  [3] [12] [15] [10] [1] [17] [4] [8]
+**       i          --> j            p
+**
+** 6. Repeat 4. if num[j] < pivot
+**
+**       *-----swap----*
+**  [3] [1] [15] [10] [12] [17] [4] [8]
+**       --> i         j             p
+**
+** 7. Again, increment j if num[j] >= pivot
+**
+**  [3] [1] [15] [10] [12] [17] [4] [8]
+**           i          -------> j   p
+**
+** 8. Repeat 4. if num[j] < pivot
+**
+**           *-------swap-------*
+**  [3] [1] [4] [10] [12] [17] [15] [8]
+**           --> i              j    p
+**
+** 9. Swap i and the pivot when j reaches to the next to the pivot
+**
+**               *-------swap-------*
+**  [3] [1] [4] [8] [12] [17] [15] [10]
+**               i             j    p
+**
+** 10. Run the same steps recursively with the left-hand side of the pivot
+**     (those which are lower than the pivot) and th right-hand side of the
+**     pivot (those which are larger than or equal to the pivot) respectively
+**     (when the size of the array is 1, just return)
+**
+**   --small--       -------big-------
+**  [3] [1] [4] [8] [12] [17] [15] [10]
+**               p
+*/
+
 static void
 	num_qsort(int *nums, int left, int right)
 {
@@ -62,6 +125,11 @@ static void
 	num_qsort(nums, left, i);
 	num_qsort(nums, i + 1, right);
 }
+
+/*
+** Convert numbers given by command line arguments into index numbers starting
+** from 0 to size_of_stack - 1
+*/
 
 void
 	ft_convert_to_index(t_blist *a, const int size_of_stack)

@@ -1,59 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_b.c                                          :+:      :+:    :+:   */
+/*   clear_sub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 16:44:47 by tnishina          #+#    #+#             */
-/*   Updated: 2021/10/02 16:52:22 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/11/28 14:30:38 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static void
-	move_min_to_tail(t_blist **a, t_ps *ps)
+	move_min_to_tail(t_blist **base, t_ps *ps)
 {
 	int	i;
 	int	len;
 
-	i = ft_get_index(*a, ps->next_min - 1);
-	len = ft_blstsize(*a);
+	i = ft_get_index(*base, ps->next_min - 1);
+	len = ft_blstsize(*base);
 	if (len / 2 <= i)
 	{
 		while (len - ++i)
-			ft_rev_rotate(a, &(ps->actions), TRUE);
+			ft_rev_rotate(base, &(ps->actions), TRUE);
 	}
 	else
 	{
 		while (i + 1)
 		{
-			ft_rotate(a, &(ps->actions), TRUE);
+			ft_rotate(base, &(ps->actions), TRUE);
 			i--;
 		}
 	}
 }
 
 void
-	ft_clear_b(t_blist **b, t_blist **a, t_ps *ps, int size)
+	ft_clear_sub(t_blist **sub, t_blist **base, t_ps *ps, int size)
 {
 	int	i;
 
-	if (*(int *)(*a)->prev->content != ps->next_min - 1)
-		move_min_to_tail(a, ps);
+	if (*(int *)(*base)->prev->content != ps->next_min - 1)
+		move_min_to_tail(base, ps);
 	i = 0;
 	while (i < size)
 	{
-		ft_push(b, a, &(ps->actions), FALSE);
-		if (*(int *)(*a)->content == ps->next_min)
+		ft_push(sub, base, &(ps->actions), FALSE);
+		if (*(int *)(*base)->content == ps->next_min)
 		{
-			ft_rotate(a, &(ps->actions), TRUE);
+			ft_rotate(base, &(ps->actions), TRUE);
 			(ps->next_min)++;
 		}
 		else
-			(*(int *)ps->p_sizes->content)++;
+			(*(int *)ps->batch_size_lst->content)++;
 		i++;
 	}
-	*b = NULL;
+	*sub = NULL;
 }

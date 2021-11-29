@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:28:12 by tnishina          #+#    #+#             */
-/*   Updated: 2021/10/10 00:59:49 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/11/28 14:30:59 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int
 	show_actions(ps.actions);
 	ft_lstclear(&(ps.actions), NULL);
 	ps.actions = NULL;
-	ps.p_sizes = NULL;
+	ps.batch_size_lst = NULL;
 	ft_blstclear(&stack_a, free);
 	stack_a = NULL;
 	stack_b = NULL;

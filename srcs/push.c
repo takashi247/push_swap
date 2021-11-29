@@ -6,18 +6,18 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 16:34:01 by tnishina          #+#    #+#             */
-/*   Updated: 2021/10/10 22:47:24 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/11/28 10:48:00 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static t_bool
-	add_action(t_list **actions, t_bool is_a)
+	add_action(t_list **actions, t_bool is_from_a)
 {
 	t_list	*new;
 
-	if (is_a)
+	if (is_from_a)
 		new = ft_lstnew("pb");
 	else
 		new = ft_lstnew("pa");
@@ -50,15 +50,15 @@ void
 }
 
 void
-	ft_push(t_blist **from, t_blist **to, t_list **actions, t_bool is_a)
+	ft_push(t_blist **from, t_blist **to, t_list **actions, t_bool is_from_a)
 {
 	t_list	*last;
 
 	ft_push_stack(from, to);
 	last = ft_lstlast(*actions);
-	if (last && ((is_a && !ft_strncmp(last->content, "pa", 3))
-			|| (!is_a && !ft_strncmp(last->content, "pb", 3))))
+	if (last && ((is_from_a && !ft_strncmp(last->content, "pa", 3))
+			|| (!is_from_a && !ft_strncmp(last->content, "pb", 3))))
 		ft_delete_action(actions);
 	else
-		add_action(actions, is_a);
+		add_action(actions, is_from_a);
 }

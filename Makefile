@@ -19,14 +19,14 @@ SRCS		:= push_swap.c \
 				quick_sort.c \
 				action_utils.c \
 				sort_utils_2.c \
-				clear_a.c \
-				clear_b.c \
-				initialize_b.c \
+				clear_base.c \
+				clear_sub.c \
+				initialize_sub.c \
 				search_next_min.c \
 				rotate_n_keep.c \
 				reset_stack_position.c \
 				halve_stack.c \
-				is_pushed_to_a.c \
+				is_added_to_batch.c \
 				main_utils.c
 
 SRCSBONUS	:= checker.c \

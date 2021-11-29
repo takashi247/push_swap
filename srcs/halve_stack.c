@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:54:31 by tnishina          #+#    #+#             */
-/*   Updated: 2021/10/03 15:28:01 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/11/28 23:27:47 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,56 +29,61 @@ static t_bool
 }
 
 static void
-	double_push_from_tail(t_blist **a, t_blist **b, t_ps *ps, t_bool is_a)
+	double_push_from_tail(t_blist **base, t_blist **sub, t_ps *ps,
+		t_bool base_is_a)
 {
-	if (!a || !*a || !b || !*b || !ps)
+	if (!base || !*base || !sub || !*sub || !ps)
 		return ;
-	ft_rev_rotate(a, &(ps->actions), is_a);
-	ft_push(a, b, &(ps->actions), is_a);
-	ft_rev_rotate(a, &(ps->actions), is_a);
-	ft_push(a, b, &(ps->actions), is_a);
-	ft_rotate(b, &(ps->actions), !is_a);
-	ft_rotate(b, &(ps->actions), !is_a);
+	ft_rev_rotate(base, &(ps->actions), base_is_a);
+	ft_push(base, sub, &(ps->actions), base_is_a);
+	ft_rev_rotate(base, &(ps->actions), base_is_a);
+	ft_push(base, sub, &(ps->actions), base_is_a);
+	ft_rotate(sub, &(ps->actions), !base_is_a);
+	ft_rotate(sub, &(ps->actions), !base_is_a);
 	ps->next_min += 2;
 }
 
 static void
-	add_p_size(t_ps *ps, int count)
+	add_batch_size(t_ps *ps, int batch_size)
 {
-	int		*p_size;
+	int		*size;
 	t_list	*new;
 
-	p_size = (int *)malloc(sizeof(int));
-	if (p_size)
-		*p_size = count;
-	new = ft_lstnew(p_size);
+	size = (int *)malloc(sizeof(int));
+	if (size)
+		*size = batch_size;
+	new = ft_lstnew(size);
 	if (!new)
 		exit(EXIT_FAILURE);
-	ft_lstadd_front(&(ps->p_sizes), new);
+	ft_lstadd_front(&(ps->batch_size_lst), new);
 }
 
 void
-	ft_halve_stack(t_blist **a, t_blist **b, t_ps *ps, t_bool is_a)
+	ft_halve_stack(t_blist **base, t_blist **sub, t_ps *ps, t_bool base_is_a)
 {
-	int			i;
-	int			count;
+	int	i;
+	int	batch_size;
 
-	ps->pivot = (ft_get_max(*a) + ft_get_min(*a)) / 2;
+	ps->pivot = (ft_get_max(*base) + ft_get_min(*base)) / 2;
 	ps->next_pivot = ps->pivot / 2;
-	ps->size_a = ft_blstsize(*a);
+	ps->size_base = ft_blstsize(*base);
 	i = -1;
-	count = 0;
-	while (++i < ps->size_a)
+	batch_size = 0;
+	while (++i < ps->size_base)
 	{
-		if (!is_a && is_double_pushable_from_tail(*a, ps))
-			double_push_from_tail(a, b, ps, is_a);
-		else if (!is_a && ft_search_next_min(a, b, ps))
+		if (!base_is_a && is_double_pushable_from_tail(*base, ps))
+		{
+			double_push_from_tail(base, sub, ps, base_is_a);
+			if (i < 2)
+				ps->size_base -= 2 - i;
+		}
+		else if (!base_is_a && ft_search_next_min(base, sub, ps))
 			continue ;
-		else if (*a)
-			count += ft_is_pushed_to_a(a, b, ps, is_a);
+		else if (*base)
+			batch_size += ft_is_added_to_batch(base, sub, ps, base_is_a);
 	}
-	if (count)
-		add_p_size(ps, count);
-	if (is_a)
-		ft_reset_stack_position(a, b, ps, is_a);
+	if (batch_size)
+		add_batch_size(ps, batch_size);
+	if (base_is_a)
+		ft_reset_stack_position(base, sub, ps, base_is_a);
 }

@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 00:16:17 by tnishina          #+#    #+#             */
-/*   Updated: 2021/10/10 18:51:30 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/11/28 10:06:13 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,26 @@ void
 	}
 }
 
+/*
+** sa + sb = ss
+** sb + sa = ss
+*/
+
 void
-	ft_swap(t_blist **stack, t_list **actions, t_bool is_a)
+	ft_swap(t_blist **stack, t_list **actions, t_bool stack_is_a)
 {
 	t_list	*new;
 	t_list	*last;
 
 	ft_swap_stack(stack);
 	last = ft_lstlast(*actions);
-	if (last && ((is_a && !ft_strncmp(last->content, "sb", 3))
-			|| (!is_a && !ft_strncmp(last->content, "sa", 3))))
+	if (last && ((stack_is_a && !ft_strncmp(last->content, "sb", 3))
+			|| (!stack_is_a && !ft_strncmp(last->content, "sa", 3))))
 	{
 		ft_delete_action(actions);
 		new = ft_lstnew("ss");
 	}
-	else if (is_a)
+	else if (stack_is_a)
 		new = ft_lstnew("sa");
 	else
 		new = ft_lstnew("sb");

@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 16:54:01 by tnishina          #+#    #+#             */
-/*   Updated: 2021/11/28 14:30:51 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/12/03 19:59:15 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,24 @@ static void
 		ft_push(base, sub, &(ps->actions), TRUE);
 }
 
+static t_bool
+	has_next_min(t_blist *stack, t_ps *ps)
+{
+	size_t	size;
+
+	if (!stack || !ps)
+		return (FALSE);
+	size = ft_blstsize(stack);
+	while (size)
+	{
+		if (*(int *)stack->content == ps->next_min)
+			return (TRUE);
+		stack = stack->next;
+		size--;
+	}
+	return (FALSE);
+}
+
 void
 	ft_initialize_sub(t_blist **base, t_blist **sub, t_ps *ps)
 {
@@ -71,16 +89,19 @@ void
 		ft_halve_stack(base, sub, ps, TRUE);
 	else
 	{
-		i = 0;
-		while (i < *(int *)ps->batch_size_lst->content)
+		while (ps->batch_size_lst && !has_next_min(*sub, ps))
 		{
-			if (is_next_min_in_head_or_tail(sub, base, ps))
-				continue ;
-			push_or_rotate(base, sub, ps);
-			i++;
+			i = 0;
+			while (i < *(int *)ps->batch_size_lst->content)
+			{
+				if (is_next_min_in_head_or_tail(sub, base, ps))
+					continue ;
+				push_or_rotate(base, sub, ps);
+				i++;
+			}
+			tmp = ps->batch_size_lst;
+			ps->batch_size_lst = ps->batch_size_lst->next;
+			ft_lstdelone(tmp, free);
 		}
-		tmp = ps->batch_size_lst;
-		ps->batch_size_lst = ps->batch_size_lst->next;
-		ft_lstdelone(tmp, free);
 	}
 }

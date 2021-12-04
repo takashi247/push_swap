@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 11:37:51 by tnishina          #+#    #+#             */
-/*   Updated: 2021/11/28 10:13:05 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/12/04 16:25:29 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void
 		t_bool base_is_a)
 {
 	const int	top = *(int *)(*base)->content;
-	const int	bottom = *(int *)(*sub)->next->content;
+	const int	bottom = *(int *)(*base)->next->content;
 	int			i;
 
 	if (!base_is_a && ft_is_rev_sorted(*base))

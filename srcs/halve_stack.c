@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:54:31 by tnishina          #+#    #+#             */
-/*   Updated: 2021/12/05 12:52:36 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/12/05 16:30:00 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,11 @@ void
 	ft_halve_stack(t_blist **base, t_blist **sub, t_ps *ps, t_bool base_is_a)
 {
 	int	i;
-	// int	batch_size;
 
 	ps->pivot = (ft_get_max(*base) + ft_get_min(*base)) / 2;
 	ps->next_pivot = ps->pivot / 2;
 	ps->size_base = ft_blstsize(*base);
 	i = -1;
-	// ps->batch_size = 0;
 	while (++i < ps->size_base)
 	{
 		if (!base_is_a && is_double_pushable_from_tail(*base, ps))

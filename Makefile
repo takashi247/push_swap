@@ -16,7 +16,7 @@ SRCS		:= push_swap.c \
 				sort_utils.c \
 				sort_four.c \
 				convert_to_index.c \
-				quick_sort.c \
+				sort_more.c \
 				action_utils.c \
 				sort_utils_2.c \
 				clear_base.c \

@@ -6,14 +6,14 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 08:40:59 by tnishina          #+#    #+#             */
-/*   Updated: 2021/11/28 11:20:54 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/12/05 16:27:22 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 void
-	ft_quick_sort(t_blist **base, t_blist **sub, t_ps *ps)
+	ft_sort_more(t_blist **base, t_blist **sub, t_ps *ps)
 {
 	int		size;
 

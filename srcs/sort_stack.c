@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 22:05:22 by tnishina          #+#    #+#             */
-/*   Updated: 2021/11/28 09:51:21 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/12/05 16:27:00 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void
 		else if (ps->sub_size == 5)
 			ft_sort_five(base, sub, &(ps->actions), base_is_a);
 		else
-			ft_quick_sort(base, sub, ps);
+			ft_sort_more(base, sub, ps);
 	}
 }

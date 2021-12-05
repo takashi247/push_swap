@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 09:52:32 by tnishina          #+#    #+#             */
-/*   Updated: 2021/12/05 16:08:13 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/12/05 16:28:36 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ void	ft_sort_four(t_blist **base, t_blist **sub, t_list **actions,
 /* convert_to_index.c */
 void	ft_convert_to_index(t_blist *a, const int size_of_stack);
 
-/* quick_sort.c */
-void	ft_quick_sort(t_blist **a, t_blist **b, t_ps *ps);
+/* sort_more.c */
+void	ft_sort_more(t_blist **a, t_blist **b, t_ps *ps);
 
 /* action_utils.c */
 void	ft_delete_action(t_list **actions);

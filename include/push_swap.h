@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 09:52:32 by tnishina          #+#    #+#             */
-/*   Updated: 2021/11/29 23:03:02 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/12/05 16:08:13 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@
 # define KO_MSG "KO\n"
 # define MAX_SORTSIZE 5
 # define MAX_MOVE 5
-# define MIN_SEARCH 2
+# define MIN_SEARCH 3
 # define MIN_BLIST_SIZE 4
+# define MAX_BATCH_SIZE_FOR_ZERO_KEEP 15
 
 /* structure for push_swap */
 
@@ -34,6 +35,7 @@ typedef struct s_ps
 {
 	t_list	*actions;
 	int		all_size;
+	int		batch_size;
 	t_list	*batch_size_lst;
 	int		sub_size;
 	int		next_min;

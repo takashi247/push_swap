@@ -40,15 +40,17 @@ SRCSBONUS	:= checker.c \
 				checker_utils.c \
 				do_instruction.c
 
-SRCSDIR		:= ./srcs/
+SRCSDIR		:= srcs/
+
+OBJSDIR		:= objs/
+
+OBJS		:= $(addprefix $(OBJSDIR), $(SRCS:.c=.o))
+
+OBJSBONUS	:= $(addprefix $(OBJSDIR), $(SRCSBONUS:.c=.o))
 
 SRCS		:= $(addprefix $(SRCSDIR), $(SRCS))
 
 SRCSBONUS	:= $(addprefix $(SRCSDIR), $(SRCSBONUS))
-
-OBJS		:= $(SRCS:.c=.o)
-
-OBJSBONUS	:= $(SRCSBONUS:.c=.o)
 
 LIBDIR		:= ./libft
 LIBPATH		:= $(LIBDIR)/libft.a
@@ -57,23 +59,23 @@ INCLUDE		:= -I./include -I./libft/
 
 LIBRARY		:= -L$(LIBDIR) -lft
 
-RM			:= rm -f
+RM			:= rm -rf
 
-# DEBUG 		:=
-DEBUG		:= -g
+DEBUG		:= -fsanitize=address -g
 
 CHECKER		:= checker
 
 all:		$(NAME)
 
 $(NAME):	$(OBJS) $(LIBPATH)
-	$(CC) $(CFLAGS) $(DEBUG) $(INCLUDE) $^ $(LIBRARY) -o $@
+	$(CC) $(CFLAGS) $(INCLUDE) $^ $(LIBRARY) -o $@
 
 $(CHECKER):	$(OBJSBONUS) $(LIBPATH)
-	$(CC) $(CFLAGS) $(DEBUG) $(INCLUDE) $^ $(LIBRARY) -o $@
+	$(CC) $(CFLAGS) $(INCLUDE) $^ $(LIBRARY) -o $@
 
-.c.o:
-	$(CC) $(CFLAGS) $(DEBUG) $(INCLUDE) -c $< -o $@
+$(OBJSDIR)%.o: $(SRCSDIR)%.c
+	@if [ ! -d $(OBJSDIR) ]; then mkdir $(OBJSDIR); fi
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(LIBPATH):
 	$(MAKE) plus -C $(LIBDIR)
@@ -81,8 +83,9 @@ $(LIBPATH):
 bonus:		$(NAME) $(CHECKER)
 
 clean:
-	$(RM) $(OBJS) $(OBJSBONUS)
+	$(RM) $(OBJSDIR)
 	$(MAKE) clean -C $(LIBDIR)
+	$(RM) -rf *.dSYM
 
 fclean:		clean
 	$(RM) $(NAME) $(CHECKER)
@@ -90,4 +93,10 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean re bonus
+debug:		CFLAGS += $(DEBUG)
+debug:		re
+
+debug_bonus:	CFLAGS += $(DEBUG)
+debug_bonus:	re bonus
+
+.PHONY:		all clean fclean re bonus debug debug_bonus

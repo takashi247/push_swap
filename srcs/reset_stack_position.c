@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 15:29:41 by tnishina          #+#    #+#             */
-/*   Updated: 2021/11/29 22:56:18 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/12/05 13:02:59 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ void
 	ps->next_min_loc = ft_get_index(*sub, ps->next_min);
 	ps->size_base = ft_blstsize(*base);
 	ps->size_sub = ft_blstsize(*sub);
-	if (ps->min_loc < ps->size_base / 2)
+	if (ps->min_loc == ps->size_base)
+		return ;
+	else if (ps->min_loc < ps->size_base / 2)
 		rotate_to_reset(base, sub, ps, base_is_a);
 	else
 		rev_rotate_to_reset(base, sub, ps, base_is_a);

@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 11:58:34 by tnishina          #+#    #+#             */
-/*   Updated: 2021/11/28 15:53:05 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/12/05 13:00:55 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ static t_bool
 	int		base_len;
 	int		current_min_loc;
 
+	if (!ps->next_min)
+	{
+		if (ps->batch_size < MAX_BATCH_SIZE_FOR_ZERO_KEEP)
+			return (TRUE);
+		else
+			return (FALSE);
+	}
 	current_min_loc = ft_get_index(base, ps->next_min - 1);
 	base_len = ft_blstsize(base);
 	if (current_min_loc == 0)

@@ -48,10 +48,6 @@ OBJS		:= $(addprefix $(OBJSDIR), $(SRCS:.c=.o))
 
 OBJSBONUS	:= $(addprefix $(OBJSDIR), $(SRCSBONUS:.c=.o))
 
-SRCS		:= $(addprefix $(SRCSDIR), $(SRCS))
-
-SRCSBONUS	:= $(addprefix $(SRCSDIR), $(SRCSBONUS))
-
 LIBDIR		:= ./libft
 LIBPATH		:= $(LIBDIR)/libft.a
 
@@ -80,7 +76,7 @@ $(OBJSDIR)%.o: $(SRCSDIR)%.c
 $(LIBPATH):
 	$(MAKE) plus -C $(LIBDIR)
 
-bonus:		$(NAME) $(CHECKER)
+bonus:		$(CHECKER)
 
 clean:
 	$(RM) $(OBJSDIR)

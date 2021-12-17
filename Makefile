@@ -81,7 +81,7 @@ bonus:		$(CHECKER)
 clean:
 	$(RM) $(OBJSDIR)
 	$(MAKE) clean -C $(LIBDIR)
-	$(RM) -rf *.dSYM
+	$(RM) *.dSYM
 
 fclean:		clean
 	$(RM) $(NAME) $(CHECKER)

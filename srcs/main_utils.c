@@ -6,7 +6,7 @@
 /*   By: tnishina <tnishina@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 00:55:40 by tnishina          #+#    #+#             */
-/*   Updated: 2021/10/10 00:58:32 by tnishina         ###   ########.fr       */
+/*   Updated: 2021/12/19 15:39:25 by tnishina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ t_bool
 {
 	int		i;
 	int		j;
+	int		current;
+	int		old;
 	char	*s;
 
 	i = 0;
@@ -62,9 +64,11 @@ t_bool
 		if (!ft_isint(s))
 			return (FALSE);
 		j = 0;
+		current = ft_atoi_s(s);
 		while (j < i)
 		{
-			if (!ft_strncmp(av[i], av[j], ft_strlen(av[i]) + 1))
+			old = ft_atoi_s(av[j]);
+			if (current == old)
 				return (FALSE);
 			j++;
 		}
